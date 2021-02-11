@@ -9,3 +9,9 @@ Sources:
 
 Environment:
 - Java 11
+
+Getting started:
+
+Set properties:
+1. **companyhouse.api.apiKey**=Basic<space><base 64 of API Key from developer site>
+<https://developer-specs.company-information.service.gov.uk/guides/authorisation>
