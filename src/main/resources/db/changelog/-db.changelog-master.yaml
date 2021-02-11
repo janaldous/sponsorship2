@@ -1,0 +1,35 @@
+changeSet:
+   id: loadData-uktiersponsors  
+   author: janaldous
+   changes:    
+    - loadData:    
+       columns:    
+        - column:    
+           header: Town
+           name: town
+           type: VARCHAR(255)
+        - column:    
+           header: Industry
+           name: 
+           type:  VARCHAR(255)
+        - column:    
+           index:  3    
+           name:  name    
+           type:  BOOLEAN    
+       commentLineStartsWith:  //    
+       encoding:  UTF-8    
+       file:  example/users.csv    
+       quotchar:  ''''    
+       relativeToChangelogFile:  true    
+       schemaName:  public    
+       separator:  ;    
+       tableName:  person    
+       usePreparedStatements:  true
+       
+- changeSet: 
+   id: pdfsponsor-changes
+   author: janaldous
+   changes: 
+    - sqlFile: 
+       path: scripts/pdfsponsor.sql
+       relativeToChangelogFile: true
