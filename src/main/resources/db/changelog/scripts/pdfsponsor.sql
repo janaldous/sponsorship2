@@ -1,0 +1,1 @@
+--ALTER TABLE pdfsponsor ALTER COLUMN id SET DEFAULT nextval('hibernate_sequence');
