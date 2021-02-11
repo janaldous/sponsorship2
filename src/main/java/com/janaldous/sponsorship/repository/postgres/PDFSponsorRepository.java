@@ -1,4 +1,4 @@
-package com.janaldous.sponsorship.repository;
+package com.janaldous.sponsorship.repository.postgres;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

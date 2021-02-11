@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.janaldous.sponsorship.domain.PDFSponsor;
-import com.janaldous.sponsorship.repository.PDFSponsorRepository;
+import com.janaldous.sponsorship.repository.postgres.PDFSponsorRepository;
 
 @RestController
 public class CompanyHouseController {
