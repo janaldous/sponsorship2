@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1613018508647-2
+    id: generated-sequence-1
     author: USER (generated)
     changes:
     - createSequence:
@@ -10,28 +10,67 @@ databaseChangeLog:
         incrementBy: 1
         maxValue: 9223372036854775807
         minValue: 1
-        sequenceName: hibernate_sequence
+        sequenceName: company_house_entry_id_seq
         startValue: 1
 - changeSet:
-    id: 1613018508647-1
+    id: generated-sequence-2
     author: USER (generated)
-    changes: 
-    - createTable: 
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 1
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: company_sponsor_id_seq
+        startValue: 1
+- changeSet:
+    id: generated-sequence-3
+    author: USER (generated)
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 1
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: pdfsponsor_id_seq
+        startValue: 1
+- changeSet:
+    id: generated-sequence-4
+    author: USER (generated)
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 1
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: sic_id_seq
+        startValue: 1
+- changeSet:
+    id: 1613048779706-1
+    author: USER (generated)
+    changes:
+    - createTable:
         columns:
         - column:
+            defaultValueSequenceNext: pdfsponsor_id_seq
             constraints:
               nullable: false
               primaryKey: true
               primaryKeyName: pdfsponsor_pkey
             name: id
             type: BIGINT
-            defaultValueSequenceNext: hibernate_sequence
-        - column: 
+        - column:
             name: company_name
             type: VARCHAR(255)
         - column:
             name: date_added
-            type: TIMESTAMP
+            type: TIMESTAMP WITHOUT TIME ZONE
         - column:
             name: industry
             type: VARCHAR(255)
@@ -45,6 +84,179 @@ databaseChangeLog:
             name: town
             type: VARCHAR(255)
         tableName: pdfsponsor
+- changeSet:
+    id: 1613048779706-2
+    author: USER (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            defaultValueSequenceNext: company_sponsor_id_seq
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: company_sponsor_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: company_house_entry_id
+            type: BIGINT
+        - column:
+            name: pdf_sponsor_id
+            type: BIGINT
+        tableName: company_sponsor
+- changeSet:
+    id: 1613048779706-3
+    author: USER (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            defaultValueSequenceNext: company_house_entry_id_seq
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: company_house_entry_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: address_post_code
+            type: VARCHAR(255)
+        - column:
+            name: address_care_of
+            type: VARCHAR(255)
+        - column:
+            name: address_country
+            type: VARCHAR(255)
+        - column:
+            name: address_line_1
+            type: VARCHAR(255)
+        - column:
+            name: address_line_2
+            type: VARCHAR(255)
+        - column:
+            name: address_locality
+            type: VARCHAR(255)
+        - column:
+            name: address_po_box
+            type: VARCHAR(255)
+        - column:
+            name: address_premises
+            type: VARCHAR(255)
+        - column:
+            name: address_region
+            type: VARCHAR(255)
+        - column:
+            name: company_name
+            type: VARCHAR(255)
+        - column:
+            name: company_number
+            type: BIGINT
+        - column:
+            name: etag
+            type: VARCHAR(255)
+        - column:
+            name: previous_company_names
+            type: VARCHAR(255)
+        tableName: company_house_entry
+- changeSet:
+    id: 1613048779706-4
+    author: USER (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: company_house_entry_id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: sic_codes_id
+            type: BIGINT
+        tableName: company_house_entry_sic_codes
+- changeSet:
+    id: 1613048779706-5
+    author: USER (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            defaultValueSequenceNext: sic_id_seq
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: sic_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: code
+            type: BIGINT
+        - column:
+            name: description
+            type: VARCHAR(255)
+        tableName: sic
+- changeSet:
+    id: 1613048779706-6
+    author: USER (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: pdf_sponsor_id
+        baseTableName: company_sponsor
+        constraintName: fkke3yp6nrb6u2lgnucbsdh07oh
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: pdfsponsor
+        validate: true
+- changeSet:
+    id: 1613048779706-7
+    author: USER (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: company_house_entry_id
+        baseTableName: company_sponsor
+        constraintName: fk1j33kuiyyjyr5wtu7mmygdy0s
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: company_house_entry
+        validate: true
+- changeSet:
+    id: 1613048779706-8
+    author: USER (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: company_house_entry_id
+        baseTableName: company_house_entry_sic_codes
+        constraintName: fk2itnti81gon6crbxliuto1stl
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: company_house_entry
+        validate: true
+- changeSet:
+    id: 1613048779706-9
+    author: USER (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: sic_codes_id
+        baseTableName: company_house_entry_sic_codes
+        constraintName: fk2jwl1gily4c1kie3m4wxh9ma8
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: sic
+        validate: true
 - changeSet:
    id: loadData-uktiersponsors  
    author: janaldous
@@ -85,4 +297,29 @@ databaseChangeLog:
        relativeToChangelogFile:  true  
        tableName:  pdfsponsor
        separator: ';'
+       usePreparedStatements:  true
+- changeSet:
+   id: loadData-siccodes  
+   author: janaldous
+   changes:    
+    - loadData:    
+       columns: 
+        - column: 
+           name: id
+           type: COMPUTED
+        - column: 
+           header: SIC Code
+           name: code
+           type: NUMERIC
+        - column:    
+           header: Description
+           name: description
+           type: STRING
+       commentLineStartsWith: '#'
+       encoding:  UTF-8
+       file:  csv/SIC07_CH_condensed_list_en.csv    
+       quotchar:  '"'
+       relativeToChangelogFile:  true  
+       tableName:  sic
+       separator: ','
        usePreparedStatements:  true
