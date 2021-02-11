@@ -1,7 +1,5 @@
 package com.janaldous.sponsorship.domain;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,28 +7,16 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
-/**
- * Sponsor from https://uktiersponsors.co.uk/
- * @author janaldous
- */
 @Entity
 @Data
-public class PDFSponsor {
+public class SIC {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String companyName;
+	private Long code;
 	
-	private String town;
-	
-	private String industry;
-	
-	private String mainTier;
-	
-	private String subTier;
-	
-	private Date dateAdded;
+	private String description;
 
 }
