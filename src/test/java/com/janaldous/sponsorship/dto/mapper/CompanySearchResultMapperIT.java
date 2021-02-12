@@ -16,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.janaldous.sponsorship.dto.model.AddressDto;
 import com.janaldous.sponsorship.dto.model.CompanyHouseSearchResultDto;
+import com.janaldous.sponsorship.repository.companyhouseapi.CompanyHouseApiException;
 import com.janaldous.sponsorship.repository.companyhouseapi.CompanyHouseApiTestConfig;
 import com.janaldous.sponsorship.service.CompanyHouseSearchService;
 
@@ -32,7 +33,7 @@ class CompanySearchResultMapperIT {
 	private CompanyHouseSearchService companyHouseSearchService;
 
 	@Test
-	void testGetOneResult() {
+	void testGetOneResult() throws CompanyHouseApiException {
 		List<CompanyHouseSearchResultDto> results = companyHouseSearchService.findByCompanyName("behavox");
 		assertEquals(1, results.size());
 		CompanyHouseSearchResultDto result = results.get(0);
@@ -47,7 +48,7 @@ class CompanySearchResultMapperIT {
 	
 	@Disabled
 	@Test
-	void testGetNullResult() {
+	void testGetNullResult() throws CompanyHouseApiException {
 		List<CompanyHouseSearchResultDto> result = companyHouseSearchService.findByCompanyName("fdslkjfdsa");
 		assertTrue(result.isEmpty());
 	}

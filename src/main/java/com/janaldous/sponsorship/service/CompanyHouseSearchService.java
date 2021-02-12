@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.janaldous.companyhouse.dto.CompanySearch;
 import com.janaldous.sponsorship.dto.mapper.CompanySearchResultMapper;
 import com.janaldous.sponsorship.dto.model.CompanyHouseSearchResultDto;
+import com.janaldous.sponsorship.repository.companyhouseapi.CompanyHouseApiException;
 import com.janaldous.sponsorship.repository.companyhouseapi.CompanyHouseSearchApi;
 
 @Service
@@ -25,7 +26,7 @@ public class CompanyHouseSearchService {
 		this.companySearchResultMapper = companySearchResultMapper;
 	}
 	
-	public List<CompanyHouseSearchResultDto> findByCompanyName(String companyName) {
+	public List<CompanyHouseSearchResultDto> findByCompanyName(String companyName) throws CompanyHouseApiException {
 		CompanySearch result = companyHouseSearchApi.searchAPI(companyName);
 		
 		if (result.getItems() == null) return null;
