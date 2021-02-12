@@ -323,3 +323,53 @@ databaseChangeLog:
        tableName:  sic
        separator: ','
        usePreparedStatements:  true
+- changeSet:
+   id: addColumn-fetchdatastatus
+   author: janaldous
+   changes:
+     - addColumn:
+        tableName: company_sponsor
+        columns:
+           name: fetch_data_status
+           type: VARCHAR(50)
+- changeSet:
+   id: loadData-uktiersponsors-all
+   author: janaldous
+   changes:    
+    - loadData:    
+       columns: 
+        - column: 
+           name: id
+           type: COMPUTED
+        - column: 
+           name: company_name
+           index: 0
+           type: STRING
+        - column:    
+           header: Town
+           name: town
+           type: STRING
+        - column:    
+           header: Industry
+           name: industry
+           type:  STRING
+        - column:    
+           header: Main Tier
+           name:  main_tier
+           type:  STRING
+        - column:    
+           header: Sub Tier
+           name:  sub_tier
+           type:  STRING
+        - column:    
+           header: Date Added
+           name:  date_added
+           type:  DATE
+       commentLineStartsWith: '#'
+       encoding:  UTF-8
+       file:  csv/UkTiersponsors_All_Semicolon_Delimiter.csv    
+       quotchar:  '"'
+       relativeToChangelogFile:  true  
+       tableName:  pdfsponsor
+       separator: ';'
+       usePreparedStatements:  true

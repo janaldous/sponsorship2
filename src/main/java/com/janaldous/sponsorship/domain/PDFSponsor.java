@@ -32,5 +32,5 @@ public class PDFSponsor {
 	private String subTier;
 	
 	private Date dateAdded;
-
+	
 }

@@ -14,11 +14,11 @@ import com.janaldous.companyhouse.dto.CompanySearch;
 import lombok.extern.slf4j.Slf4j;
 
 @ExtendWith(SpringExtension.class)
-@Import(CompanyHouseApiTestConfig.class)
+@Import({CompanyHouseApiTestConfig.class})
 @TestPropertySource(
 		  locations = "classpath:application-integrationtest.properties")
 @Slf4j
-class CompanyHouseSearchApiTest {
+class CompanyHouseSearchApiIT {
 	
 	@Autowired
 	private CompanyHouseSearchApi companyHouseSearchApi;

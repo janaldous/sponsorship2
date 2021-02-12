@@ -13,4 +13,6 @@ public class CompanyHouseSearchResultDto {
 	
 	private AddressDto address;
 	
+	private String etag;
+	
 }
