@@ -22,5 +22,5 @@ public class PDFSponsorDto {
 	private String subTier;
 	
 	private Date dateAdded;
-
+	
 }

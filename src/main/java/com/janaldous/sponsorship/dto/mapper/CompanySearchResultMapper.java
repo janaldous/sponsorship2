@@ -1,8 +1,8 @@
 package com.janaldous.sponsorship.dto.mapper;
 
 import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.janaldous.companyhouse.dto.CompanySearchItems;
@@ -44,7 +44,9 @@ public class CompanySearchResultMapper {
 	
 	public static CompanyHouseEntry toCompanyHouseEntry(CompanyHouseSearchResultDto input) {
 		CompanyHouseEntry output = new CompanyHouseEntry();
-		BeanUtils.copyProperties(input, output);
+		output.setCompanyName(input.getCompanyName())
+			.setCompanyNumber(input.getCompanyNumber())
+			.setPreviousCompanyNames(input.getPreviousCompanyNames() != null ? input.getPreviousCompanyNames().stream().collect(Collectors.joining(",")) : null);
 		AddressDto address = input.getAddress();
 		output.setAddressLine1(address.getAddressLine1())
 			.setAddressLine2(address.getAddressLine2())

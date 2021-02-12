@@ -1,5 +1,7 @@
 package com.janaldous.sponsorship.domain;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -32,5 +36,9 @@ public class CompanySponsor {
 	@Column(name = "fetch_data_status")
 	@Enumerated(EnumType.STRING)
 	private FetchDataStatus fetchDataStatus;
+	
+	@Column(name = "date_processed")
+	@UpdateTimestamp
+	private Date dateProcessed;
 	
 }

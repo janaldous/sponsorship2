@@ -373,3 +373,11 @@ databaseChangeLog:
        tableName:  pdfsponsor
        separator: ';'
        usePreparedStatements:  true
+- changeSet:
+   id: alterColumn-companyhouseentry
+   author: janaldous
+   changes:
+     - modifyDataType:
+        tableName: company_house_entry
+        columnName: company_number
+        newDataType: VARCHAR(255)
