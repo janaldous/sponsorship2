@@ -1,5 +1,7 @@
 package com.janaldous.sponsorship.dto.model;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -14,5 +16,7 @@ public class CompanyHouseSearchResultDto {
 	private AddressDto address;
 	
 	private String etag;
+	
+	private List<String> previousCompanyNames;
 	
 }

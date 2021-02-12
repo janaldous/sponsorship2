@@ -1,6 +1,8 @@
 package com.janaldous.sponsorship.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,14 +54,26 @@ public class CompanyHouseFetchService {
 				log.info(e.toString() + "");
 				throw new InternalServerException(e);
 			}
+			
+			// filter
+			if (results.size() > 1) {
+				results = results.stream().filter(CompanyHouseMultipleResultFilter.filterByLocality(pdfSponsor.getTown())).collect(Collectors.toList());
+			}
 
 			// save
-			CompanySponsor companySponsor = new CompanySponsor();
+			Optional<CompanySponsor> optionalCompanySponsor = companySponsorRepository.findByPdfSponsor(PDFSponsorMapper.toPDFSponsorEntity(pdfSponsor)).stream().findFirst();
+			CompanySponsor companySponsor = optionalCompanySponsor.orElse(new CompanySponsor());
 			companySponsor.setPdfSponsor(PDFSponsorMapper.toPDFSponsorEntity(pdfSponsor));
 
 			if (results.size() == 1) {
-				CompanyHouseEntry companyHouseEntry = companyHouseEntryRepository
-						.save(CompanySearchResultMapper.toCompanyHouseEntry(results.get(0)));
+				CompanyHouseEntry companyHouseEntry = companySponsor.getCompanyHouseEntry();
+				CompanyHouseEntry entry = CompanySearchResultMapper.toCompanyHouseEntry(results.get(0));
+				if (companyHouseEntry == null) {
+					companyHouseEntry = companyHouseEntryRepository.save(entry);
+				} else if (companyHouseEntry.getCompanyNumber() == null) {
+					companyHouseEntry.setCompanyNumber(entry.getCompanyNumber());
+					companyHouseEntry = companyHouseEntryRepository.save(companyHouseEntry);
+				}
 				companySponsor.setCompanyHouseEntry(companyHouseEntry);
 				companySponsor.setFetchDataStatus(FetchDataStatus.SUCCESS);
 			} else if (results.isEmpty()) {
