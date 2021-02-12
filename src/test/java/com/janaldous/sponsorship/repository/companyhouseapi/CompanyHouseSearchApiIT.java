@@ -24,7 +24,7 @@ class CompanyHouseSearchApiIT {
 	private CompanyHouseSearchApi companyHouseSearchApi;
 
 	@Test
-	void test() {
+	void test() throws CompanyHouseApiException {
 		CompanySearch result = companyHouseSearchApi.searchAPI("behavox");
 		log.debug(result.getTotalResults() + "");
 		assertTrue(result.getTotalResults() >= 1);

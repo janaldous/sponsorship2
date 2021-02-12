@@ -11,9 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.janaldous.sponsorship.domain.FetchDataStatus;
 import com.janaldous.sponsorship.domain.PDFSponsor;
 import com.janaldous.sponsorship.dto.mapper.PDFSponsorMapper;
-import com.janaldous.sponsorship.repository.postgres.CompanySponsorRepository;
 import com.janaldous.sponsorship.repository.postgres.PDFSponsorRepository;
 
 @SpringBootTest
@@ -26,17 +26,14 @@ class CompanyHouseFetchServiceIT {
 	@Autowired
 	private PDFSponsorRepository pdfSponsorRepository;
 	
-	@Autowired
-	private CompanySponsorRepository companySponsorRepository;
-	
 	@Test
 	void test() {
-		List<PDFSponsor> computerProgrammingSponsors = pdfSponsorRepository.findAllByIndustry("Computer Programming", PageRequest.of(0, 100));
+		List<PDFSponsor> computerProgrammingSponsors = pdfSponsorRepository.findAllByFetchStatus(FetchDataStatus.FAILED, PageRequest.of(0,  100));
 		int noOfSponsors = computerProgrammingSponsors.size();
 		companyHouseFetchService.fetchAndSaveCompanyHouseData(
 				computerProgrammingSponsors.stream().map(PDFSponsorMapper::toPDFSponsorDto).collect(Collectors.toList()));
 		
-		assertEquals(noOfSponsors, companySponsorRepository.count());
+		assertEquals(10, noOfSponsors);
 	}
 
 }

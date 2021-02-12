@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,17 @@ class PDFSponsorRepositoryTest {
 	@Autowired
 	private PDFSponsorRepository pdfSponsorRepository;
 	
+	@Disabled
 	@Test
 	void testFindByIndustry() {
 		List<PDFSponsor> sponsors = pdfSponsorRepository.findAllByIndustry("Computer Programming", PageRequest.of(0, 14));
+		
+		assertEquals(14, sponsors.size());
+	}
+	
+	@Test
+	void testFindByIndustryAndNullFetchStatus() {
+		List<PDFSponsor> sponsors = pdfSponsorRepository.findAllByIndustryAndNullFetchStatus("Computer Programming", PageRequest.of(0, 14));
 		
 		assertEquals(14, sponsors.size());
 	}

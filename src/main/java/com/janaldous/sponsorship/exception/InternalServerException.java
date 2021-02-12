@@ -10,4 +10,8 @@ public class InternalServerException extends RuntimeException {
 		super(message);
 	}
 
+	public InternalServerException(Throwable t) {
+		super(t);
+	}
+
 }
