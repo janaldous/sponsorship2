@@ -5,12 +5,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * Source: Company House https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api
@@ -19,6 +22,7 @@ import lombok.Data;
  */
 @Entity
 @Data
+@Accessors(chain = true)
 public class CompanyHouseEntry {
 
 	@Id
@@ -54,7 +58,7 @@ public class CompanyHouseEntry {
 	private String addressPOBox;
 	
 	@Column(name = "address_post_code")
-	private String adddressPostCode;
+	private String addressPostCode;
 	
 	@Column(name = "address_premises")
 	private String addressPremises;

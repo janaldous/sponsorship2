@@ -1,8 +1,12 @@
 package com.janaldous.sponsorship.config;
 
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import com.janaldous.companyhouse.api.CompanyProfileApi;
 import com.janaldous.companyhouse.api.SearchApi;
@@ -16,6 +20,9 @@ public class CompanyHouseApiConfig {
 	
 	@Value("${companyhouse.api.apiKey}")
 	public String companyHouseApiKey;
+	
+	@Autowired
+	private Environment environment;
 
 	@Bean
     public SearchApi petApi() {
@@ -32,6 +39,7 @@ public class CompanyHouseApiConfig {
         ApiClient apiClient = new ApiClient();
         apiClient.setBasePath(companyHouseApiUrl);
         apiClient.addDefaultHeader("Authorization", companyHouseApiKey);
+        apiClient.setDebugging(Arrays.asList(environment.getActiveProfiles()).contains("debug-apiclient"));
         return apiClient;
     }
 	

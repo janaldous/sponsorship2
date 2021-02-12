@@ -16,9 +16,13 @@ public class CompanyHouseSearchService {
 
 	private CompanyHouseSearchApi companyHouseSearchApi;
 	
+	private CompanySearchResultMapper companySearchResultMapper;
+	
 	@Autowired
-	public CompanyHouseSearchService(CompanyHouseSearchApi companyHouseSearchApi) {
+	public CompanyHouseSearchService(CompanyHouseSearchApi companyHouseSearchApi,
+			CompanySearchResultMapper companySearchResultMapper) {
 		this.companyHouseSearchApi = companyHouseSearchApi;
+		this.companySearchResultMapper = companySearchResultMapper;
 	}
 	
 	public List<CompanyHouseSearchResultDto> findByCompanyName(String companyName) {
@@ -27,7 +31,7 @@ public class CompanyHouseSearchService {
 		if (result.getItems() == null) return null;
 		
 		return result.getItems().stream()
-				.map(CompanySearchResultMapper::toCompanyHouseSearchResultDto)
+				.map(x -> companySearchResultMapper.toCompanyHouseSearchResultDto(x))
 				.collect(Collectors.toList());
 	}
 	
