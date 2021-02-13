@@ -2,6 +2,6 @@ package com.janaldous.sponsorship.domain;
 
 public enum FetchDataStatus {
 	
-	MORE_THAN_ONE, SUCCESS, FAILED, NO_RESULT;
+	MULTIPLE_RESULT, SUCCESS, FAILED, NO_RESULT, MULTIPLE_RESULT_MATCH_LOCALITY;
 
 }

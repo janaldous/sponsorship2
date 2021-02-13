@@ -56,13 +56,8 @@ public class CompanyHouseFetchService {
 				throw new InternalServerException(e);
 			}
 			
-			// filter
-			if (results.size() > 1) {
-				results = results.stream().filter(CompanyHouseMultipleResultFilter.filterByLocality(pdfSponsor.getTown())).collect(Collectors.toList());
-			}
-
 			// save
-			Optional<CompanySponsor> optionalCompanySponsor = companySponsorRepository.findByPdfSponsor(PDFSponsorMapper.toPDFSponsorEntity(pdfSponsor)).stream().findFirst();
+			Optional<CompanySponsor> optionalCompanySponsor = companySponsorRepository.findAllByPdfSponsor(PDFSponsorMapper.toPDFSponsorEntity(pdfSponsor)).stream().findFirst();
 			CompanySponsor companySponsor = optionalCompanySponsor.orElse(new CompanySponsor());
 			companySponsor.setPdfSponsor(PDFSponsorMapper.toPDFSponsorEntity(pdfSponsor));
 			// TODO remove me
@@ -82,7 +77,12 @@ public class CompanyHouseFetchService {
 			} else if (results.isEmpty()) {
 				companySponsor.setFetchDataStatus(FetchDataStatus.NO_RESULT);
 			} else if (results.size() > 1) {
-				companySponsor.setFetchDataStatus(FetchDataStatus.MORE_THAN_ONE);
+				results = results.stream().filter(CompanyHouseMultipleResultFilter.filterByLocality(pdfSponsor.getTown())).collect(Collectors.toList());
+				if (results.size() == 1) {
+					companySponsor.setFetchDataStatus(FetchDataStatus.MULTIPLE_RESULT_MATCH_LOCALITY);
+				} else {
+					companySponsor.setFetchDataStatus(FetchDataStatus.MULTIPLE_RESULT);					
+				}
 			}
 
 			companySponsorRepository.save(companySponsor);
