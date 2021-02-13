@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.janaldous.sponsorship.domain.FetchDataStatus;
-import com.janaldous.sponsorship.domain.PDFSponsor;
+import com.janaldous.sponsorship.domain.core.FetchDataStatus;
+import com.janaldous.sponsorship.domain.core.PDFSponsor;
 import com.janaldous.sponsorship.dto.mapper.PDFSponsorMapper;
 import com.janaldous.sponsorship.dto.model.CompanyHouseSearchResultDto;
 import com.janaldous.sponsorship.repository.companyhouseapi.CompanyHouseApiException;

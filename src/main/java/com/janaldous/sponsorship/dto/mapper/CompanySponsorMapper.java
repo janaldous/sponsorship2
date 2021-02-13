@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.dto.mapper;
 
-import com.janaldous.sponsorship.domain.CompanySponsor;
+import com.janaldous.sponsorship.domain.core.CompanySponsor;
 import com.janaldous.sponsorship.dto.model.CompanySponsorDto;
 
 public class CompanySponsorMapper {

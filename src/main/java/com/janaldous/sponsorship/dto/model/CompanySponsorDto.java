@@ -2,7 +2,7 @@ package com.janaldous.sponsorship.dto.model;
 
 import java.util.Date;
 
-import com.janaldous.sponsorship.domain.FetchDataStatus;
+import com.janaldous.sponsorship.domain.core.FetchDataStatus;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

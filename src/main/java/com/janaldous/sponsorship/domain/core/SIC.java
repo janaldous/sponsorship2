@@ -1,4 +1,4 @@
-package com.janaldous.sponsorship.domain;
+package com.janaldous.sponsorship.domain.core;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

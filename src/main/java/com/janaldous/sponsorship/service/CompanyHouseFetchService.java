@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.janaldous.sponsorship.domain.CompanyHouseEntry;
-import com.janaldous.sponsorship.domain.CompanySponsor;
-import com.janaldous.sponsorship.domain.FetchDataStatus;
+import com.janaldous.sponsorship.domain.core.CompanyHouseEntry;
+import com.janaldous.sponsorship.domain.core.CompanySponsor;
+import com.janaldous.sponsorship.domain.core.FetchDataStatus;
 import com.janaldous.sponsorship.dto.mapper.CompanySearchResultMapper;
 import com.janaldous.sponsorship.dto.mapper.PDFSponsorMapper;
 import com.janaldous.sponsorship.dto.model.CompanyHouseSearchResultDto;

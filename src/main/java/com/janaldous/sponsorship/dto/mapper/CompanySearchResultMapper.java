@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.janaldous.companyhouse.dto.CompanySearchItems;
-import com.janaldous.sponsorship.domain.CompanyHouseEntry;
+import com.janaldous.sponsorship.domain.core.CompanyHouseEntry;
 import com.janaldous.sponsorship.dto.model.AddressDto;
 import com.janaldous.sponsorship.dto.model.CompanyHouseSearchResultDto;
 import com.janaldous.sponsorship.exception.InternalServerException;

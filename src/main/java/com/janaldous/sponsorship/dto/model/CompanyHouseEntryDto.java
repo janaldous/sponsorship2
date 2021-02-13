@@ -2,7 +2,7 @@ package com.janaldous.sponsorship.dto.model;
 
 import java.util.List;
 
-import com.janaldous.sponsorship.domain.SIC;
+import com.janaldous.sponsorship.domain.core.SIC;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

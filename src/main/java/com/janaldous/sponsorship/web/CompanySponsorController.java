@@ -1,10 +1,8 @@
 package com.janaldous.sponsorship.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,11 +21,10 @@ public class CompanySponsorController {
 	}
 	
 	@GetMapping("/company")
-	public List<CompanySponsorDto> getCompanyHouseEntry(@RequestParam int page, 
+	public Page<CompanySponsorDto> getCompanyHouseEntry(@RequestParam int page,
 			@RequestParam int size,
 			@RequestParam(required = false) String town) {
-		Pageable pageable = PageRequest.of(page, size);
-		return companySponsorService.getCompanySponsors(town, pageable);
+		return companySponsorService.getCompanySponsors(town, PageRequest.of(page, size));
 	}
 	
 }

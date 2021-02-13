@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.janaldous.sponsorship.domain.FetchDataStatus;
-import com.janaldous.sponsorship.domain.PDFSponsor;
+import com.janaldous.sponsorship.domain.core.FetchDataStatus;
+import com.janaldous.sponsorship.domain.core.PDFSponsor;
 
 @Repository
 public interface PDFSponsorRepository extends JpaRepository<PDFSponsor, Long> {

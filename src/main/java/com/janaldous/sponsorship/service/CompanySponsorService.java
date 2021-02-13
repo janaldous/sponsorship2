@@ -1,8 +1,6 @@
 package com.janaldous.sponsorship.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +17,9 @@ public class CompanySponsorService {
 		this.companySponsorRepository = companySponsorRepository;
 	}
 
-	public List<CompanySponsorDto> getCompanySponsors(String town, Pageable pageable) {
-		return companySponsorRepository.findAllByTownAndLocalityAndNameMatches(town, pageable).stream()
-				.map(CompanySponsorMapper::toCompanySponsorDto)
-				.collect(Collectors.toList());
+	public Page<CompanySponsorDto> getCompanySponsors(String town, Pageable pageable) {
+		return companySponsorRepository.findAllByTownAndLocalityAndNameMatches(town, pageable)
+				.map(CompanySponsorMapper::toCompanySponsorDto);
 	}
-	
 	
 }

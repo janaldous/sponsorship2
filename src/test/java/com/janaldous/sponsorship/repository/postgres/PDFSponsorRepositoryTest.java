@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.janaldous.sponsorship.domain.PDFSponsor;
+import com.janaldous.sponsorship.domain.core.PDFSponsor;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest

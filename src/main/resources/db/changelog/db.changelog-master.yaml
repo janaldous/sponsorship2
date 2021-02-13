@@ -403,3 +403,69 @@ databaseChangeLog:
         - column:
            name: locality_matches
            type: BOOLEAN
+- changeSet:
+    id: sequence-tubestations
+    author: janaldous
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 1
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: tube_station_id_seq
+        startValue: 1
+- changeSet:
+    id: createTable-tubestations
+    author: janaldous
+    changes:
+    - createTable:
+        columns:
+        - column:
+            defaultValueSequenceNext: tube_station_id_seq
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: tube_station_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: station_name
+            type: VARCHAR(255)
+        - column:
+            name: local_authority
+            type: VARCHAR(255)
+        - column:
+            name: zone
+            type: INT
+        tableName: tube_station
+- changeSet:
+   id: loadData-tubestation-zones
+   author: janaldous
+   changes:    
+    - loadData:    
+       columns: 
+        - column: 
+           name: id
+           type: COMPUTED
+        - column: 
+           header: Station Name
+           name: station_name
+           type: STRING
+        - column:    
+           header: Local Authority
+           name: local_authority
+           type: STRING
+        - column:    
+           header: Zone
+           name: zone
+           type:  NUMERIC
+       commentLineStartsWith: '#'
+       encoding:  UTF-8
+       file:  csv/zone1_stations.csv    
+       quotchar:  '"'
+       relativeToChangelogFile:  true  
+       tableName:  tube_station
+       separator: ','
+       usePreparedStatements:  true

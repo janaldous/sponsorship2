@@ -16,6 +16,8 @@
 	<description>UK Tier 2 visa sponsors service</description>
 	<properties>
 		<java.version>11</java.version>
+		<companyhouse.version>1.0.4</companyhouse.version>
+		<springdoc.version>1.5.2</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -53,7 +55,17 @@
 		<dependency>
 			<groupId>com.janaldous</groupId>
 			<artifactId>company-house-client</artifactId>
-			<version>1.0.4</version>
+			<version>${companyhouse.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-data-rest</artifactId>
+			<version>${springdoc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
