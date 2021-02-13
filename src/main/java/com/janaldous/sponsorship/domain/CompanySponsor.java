@@ -41,4 +41,10 @@ public class CompanySponsor {
 	@UpdateTimestamp
 	private Date dateUpdated;
 	
+	@Column(name = "name_matches")
+	private Boolean nameMatches;
+	
+	@Column(name = "locality_matches")
+	private Boolean localityMatches;
+	
 }

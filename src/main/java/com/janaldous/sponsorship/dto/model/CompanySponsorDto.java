@@ -20,5 +20,9 @@ public class CompanySponsorDto {
 	private FetchDataStatus fetchDataStatus;
 	
 	private Date dateUpdated;
+	
+	private Boolean nameMatches;
+	
+	private Boolean localityMatches;
 
 }
