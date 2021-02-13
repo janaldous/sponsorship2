@@ -22,6 +22,9 @@ public interface PDFSponsorRepository extends JpaRepository<PDFSponsor, Long> {
 	@Query(value = "SELECT ps FROM PDFSponsor ps LEFT JOIN CompanySponsor cs ON cs.pdfSponsor = ps WHERE cs.fetchDataStatus = :fetchDataStatus")
 	List<PDFSponsor> findAllByFetchStatus(@Param("fetchDataStatus") FetchDataStatus fetchDataStatus, Pageable pageable);
 	
+	@Query(value = "SELECT ps FROM PDFSponsor ps LEFT JOIN CompanySponsor cs ON cs.pdfSponsor = ps WHERE cs.fetchDataStatus = :fetchDataStatus AND cs.dateUpdated IS NULL")
+	List<PDFSponsor> findAllByFetchStatusAndDateUpdatedIsNull(@Param("fetchDataStatus") FetchDataStatus fetchDataStatus, Pageable pageable);
+	
 	@Query(value = "SELECT ps FROM PDFSponsor ps LEFT JOIN CompanySponsor cs ON cs.pdfSponsor = ps JOIN CompanyHouseEntry che ON cs.companyHouseEntry = che WHERE cs.fetchDataStatus = :fetchDataStatus AND che.companyNumber IS NULL")
 	List<PDFSponsor> findAllByFetchStatusAndEmptyCompanyNumber(@Param("fetchDataStatus") FetchDataStatus fetchDataStatus, Pageable pageable);
 	

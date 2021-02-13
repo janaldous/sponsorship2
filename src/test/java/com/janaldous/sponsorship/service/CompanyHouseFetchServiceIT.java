@@ -28,7 +28,7 @@ class CompanyHouseFetchServiceIT {
 	
 	@Test
 	void test() {
-		List<PDFSponsor> computerProgrammingSponsors = pdfSponsorRepository.findAllByFetchStatus(FetchDataStatus.MORE_THAN_ONE, PageRequest.of(0, 10));
+		List<PDFSponsor> computerProgrammingSponsors = pdfSponsorRepository.findAllByFetchStatusAndDateUpdatedIsNull(FetchDataStatus.MORE_THAN_ONE, PageRequest.of(0, 600));
 		int noOfSponsors = computerProgrammingSponsors.size();
 		companyHouseFetchService.fetchAndSaveCompanyHouseData(
 				computerProgrammingSponsors.stream().map(PDFSponsorMapper::toPDFSponsorDto).collect(Collectors.toList()));
