@@ -30,7 +30,7 @@ class CompanyHouseMultipleResultPickerServiceIT {
 	
 	@Test
 	void test() throws CompanyHouseApiException {
-		List<PDFSponsor> sponsors = pdfSponsorRepository.findAllByFetchStatus(FetchDataStatus.MORE_THAN_ONE, PageRequest.of(0, 1));
+		List<PDFSponsor> sponsors = pdfSponsorRepository.findAllByFetchStatus(FetchDataStatus.MULTIPLE_RESULT, PageRequest.of(0, 1));
 		PDFSponsor sponsor = sponsors.get(0);
 		List<CompanyHouseSearchResultDto> searchResults = companyHouseSearchService.findByCompanyName(sponsor.getCompanyName());
 		List<CompanyHouseSearchResultDto> filteredResults = searchResults.stream().filter(CompanyHouseMultipleResultFilter.filterByLocality(sponsor.getTown())).collect(Collectors.toList());

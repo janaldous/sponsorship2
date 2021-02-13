@@ -19,8 +19,8 @@ public class CompanySponsorService {
 		this.companySponsorRepository = companySponsorRepository;
 	}
 
-	public List<CompanySponsorDto> getCompanySponsorService(Pageable pageable) {
-		return companySponsorRepository.findAll(pageable).stream()
+	public List<CompanySponsorDto> getCompanySponsors(String town, Pageable pageable) {
+		return companySponsorRepository.findAllByTownAndLocality(town, pageable).stream()
 				.map(CompanySponsorMapper::toCompanySponsorDto)
 				.collect(Collectors.toList());
 	}

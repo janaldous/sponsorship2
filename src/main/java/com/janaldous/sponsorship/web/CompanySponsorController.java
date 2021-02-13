@@ -24,9 +24,10 @@ public class CompanySponsorController {
 	
 	@GetMapping("/company")
 	public List<CompanySponsorDto> getCompanyHouseEntry(@RequestParam int page, 
-			@RequestParam int size) {
+			@RequestParam int size,
+			@RequestParam(required = false) String town) {
 		Pageable pageable = PageRequest.of(page, size);
-		return companySponsorService.getCompanySponsorService(pageable);
+		return companySponsorService.getCompanySponsors(town, pageable);
 	}
 	
 }
