@@ -390,3 +390,16 @@ databaseChangeLog:
         columns:
            name: date_updated
            type: DATETIME
+- changeSet:
+   id: addColumn-companysponsor-matchinfo
+   author: janaldous
+   changes:
+     - addColumn:
+        tableName: company_sponsor
+        columns:
+        - column: 
+           name: name_matches
+           type: BOOLEAN
+        - column:
+           name: locality_matches
+           type: BOOLEAN

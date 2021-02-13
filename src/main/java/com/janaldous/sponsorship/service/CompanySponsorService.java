@@ -20,7 +20,7 @@ public class CompanySponsorService {
 	}
 
 	public List<CompanySponsorDto> getCompanySponsors(String town, Pageable pageable) {
-		return companySponsorRepository.findAllByTownAndLocality(town, pageable).stream()
+		return companySponsorRepository.findAllByTownAndLocalityAndNameMatches(town, pageable).stream()
 				.map(CompanySponsorMapper::toCompanySponsorDto)
 				.collect(Collectors.toList());
 	}
