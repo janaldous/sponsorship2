@@ -1,5 +1,6 @@
 package com.janaldous.sponsorship.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -64,6 +65,8 @@ public class CompanyHouseFetchService {
 			Optional<CompanySponsor> optionalCompanySponsor = companySponsorRepository.findByPdfSponsor(PDFSponsorMapper.toPDFSponsorEntity(pdfSponsor)).stream().findFirst();
 			CompanySponsor companySponsor = optionalCompanySponsor.orElse(new CompanySponsor());
 			companySponsor.setPdfSponsor(PDFSponsorMapper.toPDFSponsorEntity(pdfSponsor));
+			// TODO remove me
+			companySponsor.setDateUpdated(new Date());
 
 			if (results.size() == 1) {
 				CompanyHouseEntry companyHouseEntry = companySponsor.getCompanyHouseEntry();

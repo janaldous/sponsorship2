@@ -37,8 +37,8 @@ public class CompanySponsor {
 	@Enumerated(EnumType.STRING)
 	private FetchDataStatus fetchDataStatus;
 	
-	@Column(name = "date_processed")
+	@Column(name = "date_updated")
 	@UpdateTimestamp
-	private Date dateProcessed;
+	private Date dateUpdated;
 	
 }

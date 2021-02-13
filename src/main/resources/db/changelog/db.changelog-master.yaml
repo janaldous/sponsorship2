@@ -381,3 +381,12 @@ databaseChangeLog:
         tableName: company_house_entry
         columnName: company_number
         newDataType: VARCHAR(255)
+- changeSet:
+   id: addColumn-companysponsor-dateupdated
+   author: janaldous
+   changes:
+     - addColumn:
+        tableName: company_sponsor
+        columns:
+           name: date_updated
+           type: DATETIME
