@@ -67,7 +67,7 @@ class TflLineApiTest {
 		
 		csv.forEach(System.out::println);
 		
-		writeToFile("src/main/resources/tfl/stations.json", csv);
+		writeToFile("src/main/resources/db/changelog/csv/stations.csv", csv);
 	}
 
 	private void writeToFile(String filename, List<String> lines) throws IOException {
