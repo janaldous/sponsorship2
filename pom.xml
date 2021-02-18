@@ -18,6 +18,7 @@
 		<java.version>11</java.version>
 		<companyhouse.version>1.0.4</companyhouse.version>
 		<springdoc.version>1.5.2</springdoc.version>
+		<tfl.version>1.0.0</tfl.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -56,6 +57,11 @@
 			<groupId>com.janaldous</groupId>
 			<artifactId>company-house-client</artifactId>
 			<version>${companyhouse.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.janaldous</groupId>
+			<artifactId>tfl-client</artifactId>
+			<version>${tfl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
