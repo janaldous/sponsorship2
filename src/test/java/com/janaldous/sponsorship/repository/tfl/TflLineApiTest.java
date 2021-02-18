@@ -43,7 +43,7 @@ class TflLineApiTest {
 				.findFirst().orElse(null);;
 		
 		String name = stop.getCommonName();
-		return MessageFormat.format("{0},{1},{2}", name, zone, address);
+		return MessageFormat.format("{0},{1},\"{2}\"", name, zone, address);
 	};
 	
 	@Test
