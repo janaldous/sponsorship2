@@ -38,10 +38,17 @@ class TflLineApiTest {
 				.map(TflApiPresentationEntitiesAdditionalProperties::getValue).findFirst().orElse(null);
 		String address = stop.getAdditionalProperties().stream().filter(prop -> "Address".equals(prop.getKey()))
 				.map(TflApiPresentationEntitiesAdditionalProperties::getValue).findFirst().orElse(null);
-		;
 
 		String name = stop.getCommonName();
-		return MessageFormat.format("{0},{1},\"{2}\"", name, zone, address);
+		String postcode = null;
+		try {
+			if (address != null) {
+				postcode = TflAddressUtil.getPostCodeDistrict(address);
+			}
+		} catch (IllegalArgumentException e) {		
+			log.warn(e.getMessage());
+		}
+		return MessageFormat.format("{0},{1},\"{2}\",{3}", name, zone, address, postcode);
 	};
 
 	@Test
@@ -62,7 +69,7 @@ class TflLineApiTest {
 		csv.forEach(System.out::println);
 
 		writeToFile("src/main/resources/db/changelog/csv/stations.csv", csv,
-				new String[] { "Station Name", "Zone", "Address" });
+				new String[] { "Station Name", "Zone", "Address", "Post Code" });
 	}
 
 	private void writeToFile(String filename, List<String> lines, String[] headers) throws IOException {

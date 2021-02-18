@@ -24,6 +24,9 @@ public class TubeStation {
 	@Column(name = "address")
 	private String address;
 	
+	@Column(name = "post_code")
+	private String postCode;
+	
 	@Column(name = "zone")
 	private Integer zone;
 	

@@ -5,6 +5,7 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.JsonArray;
@@ -51,7 +52,7 @@ public class TubeStationLocation {
 		if (split.length == 1) {
 			return postCode;
 		} else if (split.length != 2) {
-			throw new IllegalArgumentException("Post code format is invalid: " + address);
+			throw new IllegalArgumentException("Post code format is invalid: " + Arrays.toString(split));
 		}
 		return split[0];
 	}

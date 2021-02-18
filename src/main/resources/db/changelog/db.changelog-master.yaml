@@ -437,6 +437,9 @@ databaseChangeLog:
             name: address
             type: VARCHAR(255)
         - column:
+            name: post_code
+            type: VARCHAR(20)
+        - column:
             name: zone
             type: INT
         tableName: tube_station
@@ -456,6 +459,10 @@ databaseChangeLog:
         - column:    
            header: Address
            name: address
+           type: STRING
+        - column:    
+           header: Post Code
+           name: post_code
            type: STRING
         - column:    
            header: Zone
