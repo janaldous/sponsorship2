@@ -17,19 +17,16 @@ public class TflApiConfig {
 	@Value("${tfl.api.url}")
 	public String tflApiUrl;
 	
-	@Value("${tfl.api.apiKey}")
-	public String tflApiKey;
-	
 	@Autowired
 	private Environment environment;
 
 	@Bean
-    public LineApi petApi() {
-        return new LineApi(apiClient());
+    public LineApi lineApi() {
+        return new LineApi(apiClientTfl());
     }
 	
 	@Bean
-    public ApiClient apiClient() {
+    public ApiClient apiClientTfl() {
         ApiClient apiClient = new ApiClient();
         apiClient.setBasePath(tflApiUrl);
         apiClient.setDebugging(Arrays.asList(environment.getActiveProfiles()).contains("debug-apiclient"));

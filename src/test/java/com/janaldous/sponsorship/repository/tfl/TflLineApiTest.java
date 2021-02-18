@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -33,19 +34,16 @@ class TflLineApiTest {
 	private TflLineApi tflLineApi;
 
 	private Function<TflApiPresentationEntitiesStopPoint, String> mapToCSVRow = stop -> {
-		String zone = stop.getAdditionalProperties().stream()
-			.filter(prop -> "Zone".equals(prop.getKey()))
-			.map(TflApiPresentationEntitiesAdditionalProperties::getValue)
-			.findFirst().orElse(null);
-		String address = stop.getAdditionalProperties().stream()
-				.filter(prop -> "Address".equals(prop.getKey()))
-				.map(TflApiPresentationEntitiesAdditionalProperties::getValue)
-				.findFirst().orElse(null);;
-		
+		String zone = stop.getAdditionalProperties().stream().filter(prop -> "Zone".equals(prop.getKey()))
+				.map(TflApiPresentationEntitiesAdditionalProperties::getValue).findFirst().orElse(null);
+		String address = stop.getAdditionalProperties().stream().filter(prop -> "Address".equals(prop.getKey()))
+				.map(TflApiPresentationEntitiesAdditionalProperties::getValue).findFirst().orElse(null);
+		;
+
 		String name = stop.getCommonName();
 		return MessageFormat.format("{0},{1},\"{2}\"", name, zone, address);
 	};
-	
+
 	@Test
 	void testCallApi_thenWriteCSVToFile() throws IOException {
 		List<TflApiPresentationEntitiesLine> result = tflLineApi.getLinesByMode("Regular", "tube", "dlr");
@@ -55,27 +53,28 @@ class TflLineApiTest {
 		String lineIds = result.stream().map(TflApiPresentationEntitiesLine::getId).collect(Collectors.joining(","));
 		log.info("line ids: " + lineIds);
 
-		List<String> csv = result.stream()
-			.map(TflApiPresentationEntitiesLine::getId)
-			.map(lineId -> {
-				List<TflApiPresentationEntitiesStopPoint> stops = tflLineApi.getStopsInLine(lineId, false);
-				log.info(MessageFormat.format("lineId = {0} no of stops = {1}", lineId, stops.size()));
-				return stops.stream().map(mapToCSVRow).collect(Collectors.toList());
-			})
-			.flatMap(List::stream)
-			.collect(Collectors.toList());
-		
+		List<String> csv = result.stream().map(TflApiPresentationEntitiesLine::getId).map(lineId -> {
+			List<TflApiPresentationEntitiesStopPoint> stops = tflLineApi.getStopsInLine(lineId, false);
+			log.info(MessageFormat.format("lineId = {0} no of stops = {1}", lineId, stops.size()));
+			return stops.stream().map(mapToCSVRow).collect(Collectors.toList());
+		}).flatMap(List::stream).collect(Collectors.toList());
+
 		csv.forEach(System.out::println);
-		
-		writeToFile("src/main/resources/db/changelog/csv/stations.csv", csv);
+
+		writeToFile("src/main/resources/db/changelog/csv/stations.csv", csv,
+				new String[] { "Station Name", "Zone", "Address" });
 	}
 
-	private void writeToFile(String filename, List<String> lines) throws IOException {
-		FileWriter writer = new FileWriter(filename); 
-		for(String str: lines) {
-		  writer.write(str + System.lineSeparator());
+	private void writeToFile(String filename, List<String> lines, String[] headers) throws IOException {
+		try (FileWriter writer = new FileWriter(filename)) {
+			// header
+			writer.write(Arrays.stream(headers).collect(Collectors.joining(",")) + System.lineSeparator());
+
+			// content
+			for (String str : lines) {
+				writer.write(str + System.lineSeparator());
+			}
 		}
-		writer.close();
 	}
-	
+
 }

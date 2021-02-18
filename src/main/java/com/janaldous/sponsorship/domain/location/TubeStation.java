@@ -21,8 +21,8 @@ public class TubeStation {
 	@Column(name = "station_name")
 	private String stationName;
 	
-	@Column(name = "local_authority")
-	private String localAuthority;
+	@Column(name = "address")
+	private String address;
 	
 	@Column(name = "zone")
 	private Integer zone;

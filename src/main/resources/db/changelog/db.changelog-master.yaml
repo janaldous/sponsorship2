@@ -434,7 +434,7 @@ databaseChangeLog:
             name: station_name
             type: VARCHAR(255)
         - column:
-            name: local_authority
+            name: address
             type: VARCHAR(255)
         - column:
             name: zone
@@ -454,8 +454,8 @@ databaseChangeLog:
            name: station_name
            type: STRING
         - column:    
-           header: Local Authority
-           name: local_authority
+           header: Address
+           name: address
            type: STRING
         - column:    
            header: Zone
@@ -463,7 +463,7 @@ databaseChangeLog:
            type:  NUMERIC
        commentLineStartsWith: '#'
        encoding:  UTF-8
-       file:  csv/zone1_stations.csv    
+       file:  csv/stations.csv    
        quotchar:  '"'
        relativeToChangelogFile:  true  
        tableName:  tube_station

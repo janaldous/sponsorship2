@@ -25,17 +25,17 @@ public class CompanyHouseApiConfig {
 	private Environment environment;
 
 	@Bean
-    public SearchApi petApi() {
-        return new SearchApi(apiClient());
+    public SearchApi searchApi() {
+        return new SearchApi(apiClientCompanyHouse());
     }
 	
 	@Bean
 	public CompanyProfileApi companyProfileApi() {
-		return new CompanyProfileApi(apiClient());
+		return new CompanyProfileApi(apiClientCompanyHouse());
 	}
 	
 	@Bean
-    public ApiClient apiClient() {
+    public ApiClient apiClientCompanyHouse() {
         ApiClient apiClient = new ApiClient();
         apiClient.setBasePath(companyHouseApiUrl);
         apiClient.addDefaultHeader("Authorization", companyHouseApiKey);
