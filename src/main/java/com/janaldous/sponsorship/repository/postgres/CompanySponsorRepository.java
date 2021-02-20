@@ -46,8 +46,8 @@ public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, 
 			+ "JOIN CompanyHouseEntry che "
 			+ "ON cs.companyHouseEntry = che "
 			+ "JOIN TubeStation t "
-			+ "ON t.postCode IS NOT NULL "
-			+ "AND che.addressPostCode LIKE t.postCode || '%' "
+			+ "ON t.postCodeDistrict IS NOT NULL "
+			+ "AND che.addressPostCode LIKE t.postCodeDistrict || '%' "
 			+ "WHERE t.zone = :zone "
 			+ "AND cs.nameMatches = true "
 			+ "GROUP BY t.zone, cs.id")

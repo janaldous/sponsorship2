@@ -13,10 +13,10 @@ public interface CompanyHouseEntryRepository extends JpaRepository<CompanyHouseE
 
 	@Query("SELECT DISTINCT che "
 			+ "FROM CompanyHouseEntry che "
-			+ "JOIN TubeStation t ON t.postCode IS NOT NULL "
-			+ "AND che.addressPostCode LIKE t.postCode || '%' "
+			+ "JOIN TubeStation t ON t.postCodeDistrict IS NOT NULL "
+			+ "AND che.addressPostCode LIKE t.postCodeDistrict || '%' "
 			+ "WHERE t.zone = :zone "
-			+ "AND t.postCode IS NOT NULL "
+			+ "AND t.postCodeDistrict IS NOT NULL "
 			+ "GROUP BY t.zone")
 	Page<CompanyHouseEntry> findAllByTflZone(Integer zone, Pageable pageable);
 	

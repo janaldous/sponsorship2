@@ -24,8 +24,9 @@ public class TubeStation {
 	@Column(name = "address")
 	private String address;
 	
+	// TODO rename db column and csv to post_code_district
 	@Column(name = "post_code")
-	private String postCode;
+	private String postCodeDistrict;
 	
 	@Column(name = "zone")
 	private Integer zone;
