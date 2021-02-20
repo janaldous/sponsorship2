@@ -17,8 +17,13 @@ public class CompanySponsorService {
 		this.companySponsorRepository = companySponsorRepository;
 	}
 
-	public Page<CompanySponsorDto> getCompanySponsors(String town, Pageable pageable) {
+	public Page<CompanySponsorDto> getCompanySponsorsByLocality(String town, Pageable pageable) {
 		return companySponsorRepository.findAllByTownAndLocalityAndNameMatches(town, pageable)
+				.map(CompanySponsorMapper::toCompanySponsorDto);
+	}
+	
+	public Page<CompanySponsorDto> getCompanySponsorsByTflZone(Integer zone, Pageable pageable) {
+		return companySponsorRepository.findAllByTflZoneAndNameMatches(zone, pageable)
 				.map(CompanySponsorMapper::toCompanySponsorDto);
 	}
 	

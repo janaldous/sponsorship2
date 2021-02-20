@@ -23,8 +23,8 @@ public class CompanySponsorController {
 	@GetMapping("/company")
 	public Page<CompanySponsorDto> getCompanyHouseEntry(@RequestParam int page,
 			@RequestParam int size,
-			@RequestParam(required = false) String town) {
-		return companySponsorService.getCompanySponsors(town, PageRequest.of(page, size));
+			@RequestParam int zone) {
+		return companySponsorService.getCompanySponsorsByTflZone(zone, PageRequest.of(page, size));
 	}
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.janaldous.sponsorship.domain.core.CompanySponsor;
 import com.janaldous.sponsorship.domain.core.PDFSponsor;
+import com.janaldous.sponsorship.repository.postgres.model.CompanySponsorZone;
 
 @Repository
 public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, Long> {
@@ -37,5 +38,19 @@ public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, 
 			+ "AND (che.addressLocality LIKE %:town% OR ps.town LIKE %:town%) "
 			+ "AND cs.nameMatches = true")
 	Page<CompanySponsor> findAllByTownAndLocalityAndNameMatches(@Param("town") String town, Pageable pageable);
+	
+	@Query("SELECT new com.janaldous.sponsorship.repository.postgres.model.CompanySponsorZone(cs, t.zone as zone) "
+			+ "FROM CompanySponsor cs "
+			+ "JOIN PDFSponsor ps "
+			+ "ON cs.pdfSponsor = ps "
+			+ "JOIN CompanyHouseEntry che "
+			+ "ON cs.companyHouseEntry = che "
+			+ "JOIN TubeStation t "
+			+ "ON t.postCode IS NOT NULL "
+			+ "AND che.addressPostCode LIKE t.postCode || '%' "
+			+ "WHERE t.zone = :zone "
+			+ "AND cs.nameMatches = true "
+			+ "GROUP BY t.zone, cs.id")
+	Page<CompanySponsorZone> findAllByTflZoneAndNameMatches(@Param("zone") Integer zone, Pageable pageable);
 
 }

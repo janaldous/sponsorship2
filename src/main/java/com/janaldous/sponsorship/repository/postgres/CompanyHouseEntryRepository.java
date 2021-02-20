@@ -16,7 +16,8 @@ public interface CompanyHouseEntryRepository extends JpaRepository<CompanyHouseE
 			+ "JOIN TubeStation t ON t.postCode IS NOT NULL "
 			+ "AND che.addressPostCode LIKE t.postCode || '%' "
 			+ "WHERE t.zone = :zone "
-			+ "AND t.postCode IS NOT NULL")
+			+ "AND t.postCode IS NOT NULL "
+			+ "GROUP BY t.zone")
 	Page<CompanyHouseEntry> findAllByTflZone(Integer zone, Pageable pageable);
 	
 }
