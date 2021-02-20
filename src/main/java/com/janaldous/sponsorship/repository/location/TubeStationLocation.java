@@ -27,7 +27,6 @@ public class TubeStationLocation {
 			String name = properties.get("Name").getAsString();
 			String address = properties.get("description").getAsString();
 			String postCode = getPostCode(address);
-			String postCodeDistrict = getPostCodeDistrict(address);
 			if (postCode.equals("SW1H 0BD")) {
 				
 				output.add(postCode + "\t" + name);

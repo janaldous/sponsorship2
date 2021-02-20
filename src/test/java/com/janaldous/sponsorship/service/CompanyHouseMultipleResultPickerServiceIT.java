@@ -13,7 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.janaldous.sponsorship.domain.core.FetchDataStatus;
 import com.janaldous.sponsorship.domain.core.PDFSponsor;
-import com.janaldous.sponsorship.dto.mapper.PDFSponsorMapper;
 import com.janaldous.sponsorship.dto.model.CompanyHouseSearchResultDto;
 import com.janaldous.sponsorship.repository.companyhouseapi.CompanyHouseApiException;
 import com.janaldous.sponsorship.repository.postgres.PDFSponsorRepository;
