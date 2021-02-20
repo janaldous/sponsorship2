@@ -16,16 +16,37 @@ public interface PDFSponsorRepository extends JpaRepository<PDFSponsor, Long> {
 
 	List<PDFSponsor> findAllByIndustry(String industry, Pageable pageable);
 	
-	@Query(value = "SELECT ps FROM PDFSponsor ps LEFT JOIN CompanySponsor cs ON cs.pdfSponsor = ps WHERE cs.pdfSponsor IS NULL AND ps.industry = :industry")
+	@Query(value = "SELECT ps "
+			+ "FROM PDFSponsor ps "
+			+ "LEFT JOIN CompanySponsor cs "
+			+ "ON cs.pdfSponsor = ps "
+			+ "WHERE cs.pdfSponsor IS NULL "
+			+ "AND ps.industry = :industry")
 	List<PDFSponsor> findAllByIndustryAndNullFetchStatus(@Param("industry") String industry, Pageable pageable);
 	
-	@Query(value = "SELECT ps FROM PDFSponsor ps LEFT JOIN CompanySponsor cs ON cs.pdfSponsor = ps WHERE cs.fetchDataStatus = :fetchDataStatus")
+	@Query(value = "SELECT ps "
+			+ "FROM PDFSponsor ps "
+			+ "LEFT JOIN CompanySponsor cs "
+			+ "ON cs.pdfSponsor = ps "
+			+ "WHERE cs.fetchDataStatus = :fetchDataStatus")
 	List<PDFSponsor> findAllByFetchStatus(@Param("fetchDataStatus") FetchDataStatus fetchDataStatus, Pageable pageable);
 	
-	@Query(value = "SELECT ps FROM PDFSponsor ps LEFT JOIN CompanySponsor cs ON cs.pdfSponsor = ps WHERE cs.fetchDataStatus = :fetchDataStatus AND cs.dateUpdated IS NULL")
+	@Query(value = "SELECT ps "
+			+ "FROM PDFSponsor ps "
+			+ "LEFT JOIN CompanySponsor cs "
+			+ "ON cs.pdfSponsor = ps "
+			+ "WHERE cs.fetchDataStatus = :fetchDataStatus "
+			+ "AND cs.dateUpdated IS NULL")
 	List<PDFSponsor> findAllByFetchStatusAndDateUpdatedIsNull(@Param("fetchDataStatus") FetchDataStatus fetchDataStatus, Pageable pageable);
 	
-	@Query(value = "SELECT ps FROM PDFSponsor ps LEFT JOIN CompanySponsor cs ON cs.pdfSponsor = ps JOIN CompanyHouseEntry che ON cs.companyHouseEntry = che WHERE cs.fetchDataStatus = :fetchDataStatus AND che.companyNumber IS NULL")
+	@Query(value = "SELECT ps "
+			+ "FROM PDFSponsor ps "
+			+ "LEFT JOIN CompanySponsor cs "
+			+ "ON cs.pdfSponsor = ps "
+			+ "JOIN CompanyHouseEntry che "
+			+ "ON cs.companyHouseEntry = che "
+			+ "WHERE cs.fetchDataStatus = :fetchDataStatus "
+			+ "AND che.companyNumber IS NULL")
 	List<PDFSponsor> findAllByFetchStatusAndEmptyCompanyNumber(@Param("fetchDataStatus") FetchDataStatus fetchDataStatus, Pageable pageable);
 	
 }

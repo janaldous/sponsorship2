@@ -17,10 +17,25 @@ public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, 
 
 	List<CompanySponsor> findAllByPdfSponsor(PDFSponsor pdfSponsor);
 	
-	@Query("SELECT cs FROM CompanySponsor cs JOIN PDFSponsor ps ON cs.pdfSponsor = ps JOIN CompanyHouseEntry che ON cs.companyHouseEntry = che WHERE :town IS NOT NULL AND (che.addressLocality LIKE %:town% OR ps.town LIKE %:town%)")
+	@Query("SELECT cs "
+			+ "FROM CompanySponsor cs "
+			+ "JOIN PDFSponsor ps "
+			+ "ON cs.pdfSponsor = ps "
+			+ "JOIN CompanyHouseEntry che "
+			+ "ON cs.companyHouseEntry = che "
+			+ "WHERE :town IS NOT NULL "
+			+ "AND (che.addressLocality LIKE %:town% OR ps.town LIKE %:town%)")
 	List<CompanySponsor> findAllByTownAndLocality(@Param("town") String town, Pageable pageable);
 	
-	@Query("SELECT cs FROM CompanySponsor cs JOIN PDFSponsor ps ON cs.pdfSponsor = ps JOIN CompanyHouseEntry che ON cs.companyHouseEntry = che WHERE :town IS NOT NULL AND (che.addressLocality LIKE %:town% OR ps.town LIKE %:town%) and cs.nameMatches = true")
+	@Query("SELECT cs "
+			+ "FROM CompanySponsor cs "
+			+ "JOIN PDFSponsor ps "
+			+ "ON cs.pdfSponsor = ps "
+			+ "JOIN CompanyHouseEntry che "
+			+ "ON cs.companyHouseEntry = che "
+			+ "WHERE :town IS NOT NULL "
+			+ "AND (che.addressLocality LIKE %:town% OR ps.town LIKE %:town%) "
+			+ "AND cs.nameMatches = true")
 	Page<CompanySponsor> findAllByTownAndLocalityAndNameMatches(@Param("town") String town, Pageable pageable);
 
 }
