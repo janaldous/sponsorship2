@@ -258,151 +258,151 @@ databaseChangeLog:
         referencedTableName: sic
         validate: true
 - changeSet:
-   id: loadData-uktiersponsors  
-   author: janaldous
-   changes:    
-    - loadData:    
-       columns: 
-        - column: 
-           name: id
-           type: COMPUTED
-        - column: 
-           name: company_name
-           index: 0
-           type: STRING
-        - column:    
-           header: Town
-           name: town
-           type: STRING
-        - column:    
-           header: Industry
-           name: industry
-           type:  STRING
-        - column:    
-           header: Main Tier
-           name:  main_tier
-           type:  STRING
-        - column:    
-           header: Sub Tier
-           name:  sub_tier
-           type:  STRING
-        - column:    
-           header: Date Added
-           name:  date_added
-           type:  DATE
-       commentLineStartsWith: '#'
-       encoding:  UTF-8
-       file:  csv/UkTiersponsors_Recent_Semicolon_Delimiter.csv    
-       quotchar:  '"'
-       relativeToChangelogFile:  true  
-       tableName:  pdfsponsor
-       separator: ';'
-       usePreparedStatements:  true
+    id: loadData-uktiersponsors
+    author: janaldous
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: id
+            type: COMPUTED
+        - column:
+            name: company_name
+            index: 0
+            type: STRING
+        - column:
+            header: Town
+            name: town
+            type: STRING
+        - column:
+            header: Industry
+            name: industry
+            type: STRING
+        - column:
+            header: Main Tier
+            name: main_tier
+            type: STRING
+        - column:
+            header: Sub Tier
+            name: sub_tier
+            type: STRING
+        - column:
+            header: Date Added
+            name: date_added
+            type: DATE
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: csv/UkTiersponsors_Recent_Semicolon_Delimiter.csv
+        quotchar: '"'
+        relativeToChangelogFile: true
+        tableName: pdfsponsor
+        separator: ;
+        usePreparedStatements: true
 - changeSet:
-   id: loadData-siccodes  
-   author: janaldous
-   changes:    
-    - loadData:    
-       columns: 
-        - column: 
-           name: id
-           type: COMPUTED
-        - column: 
-           header: SIC Code
-           name: code
-           type: NUMERIC
-        - column:    
-           header: Description
-           name: description
-           type: STRING
-       commentLineStartsWith: '#'
-       encoding:  UTF-8
-       file:  csv/SIC07_CH_condensed_list_en.csv    
-       quotchar:  '"'
-       relativeToChangelogFile:  true  
-       tableName:  sic
-       separator: ','
-       usePreparedStatements:  true
+    id: loadData-siccodes
+    author: janaldous
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: id
+            type: COMPUTED
+        - column:
+            header: SIC Code
+            name: code
+            type: NUMERIC
+        - column:
+            header: Description
+            name: description
+            type: STRING
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: csv/SIC07_CH_condensed_list_en.csv
+        quotchar: '"'
+        relativeToChangelogFile: true
+        tableName: sic
+        separator: ','
+        usePreparedStatements: true
 - changeSet:
-   id: addColumn-fetchdatastatus
-   author: janaldous
-   changes:
-     - addColumn:
+    id: addColumn-fetchdatastatus
+    author: janaldous
+    changes:
+    - addColumn:
         tableName: company_sponsor
         columns:
-           name: fetch_data_status
-           type: VARCHAR(50)
+          name: fetch_data_status
+          type: VARCHAR(50)
 - changeSet:
-   id: loadData-uktiersponsors-all
-   author: janaldous
-   changes:    
-    - loadData:    
-       columns: 
-        - column: 
-           name: id
-           type: COMPUTED
-        - column: 
-           name: company_name
-           index: 0
-           type: STRING
-        - column:    
-           header: Town
-           name: town
-           type: STRING
-        - column:    
-           header: Industry
-           name: industry
-           type:  STRING
-        - column:    
-           header: Main Tier
-           name:  main_tier
-           type:  STRING
-        - column:    
-           header: Sub Tier
-           name:  sub_tier
-           type:  STRING
-        - column:    
-           header: Date Added
-           name:  date_added
-           type:  DATE
-       commentLineStartsWith: '#'
-       encoding:  UTF-8
-       file:  csv/UkTiersponsors_All_Semicolon_Delimiter.csv    
-       quotchar:  '"'
-       relativeToChangelogFile:  true  
-       tableName:  pdfsponsor
-       separator: ';'
-       usePreparedStatements:  true
+    id: loadData-uktiersponsors-all
+    author: janaldous
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: id
+            type: COMPUTED
+        - column:
+            name: company_name
+            index: 0
+            type: STRING
+        - column:
+            header: Town
+            name: town
+            type: STRING
+        - column:
+            header: Industry
+            name: industry
+            type: STRING
+        - column:
+            header: Main Tier
+            name: main_tier
+            type: STRING
+        - column:
+            header: Sub Tier
+            name: sub_tier
+            type: STRING
+        - column:
+            header: Date Added
+            name: date_added
+            type: DATE
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: csv/UkTiersponsors_All_Semicolon_Delimiter.csv
+        quotchar: '"'
+        relativeToChangelogFile: true
+        tableName: pdfsponsor
+        separator: ;
+        usePreparedStatements: true
 - changeSet:
-   id: alterColumn-companyhouseentry
-   author: janaldous
-   changes:
-     - modifyDataType:
+    id: alterColumn-companyhouseentry
+    author: janaldous
+    changes:
+    - modifyDataType:
         tableName: company_house_entry
         columnName: company_number
         newDataType: VARCHAR(255)
 - changeSet:
-   id: addColumn-companysponsor-dateupdated
-   author: janaldous
-   changes:
-     - addColumn:
+    id: addColumn-companysponsor-dateupdated
+    author: janaldous
+    changes:
+    - addColumn:
         tableName: company_sponsor
         columns:
-           name: date_updated
-           type: DATETIME
+          name: date_updated
+          type: DATETIME
 - changeSet:
-   id: addColumn-companysponsor-matchinfo
-   author: janaldous
-   changes:
-     - addColumn:
+    id: addColumn-companysponsor-matchinfo
+    author: janaldous
+    changes:
+    - addColumn:
         tableName: company_sponsor
         columns:
-        - column: 
-           name: name_matches
-           type: BOOLEAN
         - column:
-           name: locality_matches
-           type: BOOLEAN
+            name: name_matches
+            type: BOOLEAN
+        - column:
+            name: locality_matches
+            type: BOOLEAN
 - changeSet:
     id: sequence-tubestations
     author: janaldous
@@ -444,38 +444,38 @@ databaseChangeLog:
             type: INT
         tableName: tube_station
 - changeSet:
-   id: loadData-tubestation-zones
-   author: janaldous
-   changes:    
-    - loadData:    
-       columns: 
-        - column: 
-           name: id
-           type: COMPUTED
-        - column: 
-           header: Station Name
-           name: station_name
-           type: STRING
-        - column:    
-           header: Address
-           name: address
-           type: STRING
-        - column:    
-           header: Post Code District
-           name: post_code_district
-           type: STRING
-        - column:    
-           header: Zone
-           name: zone
-           type:  NUMERIC
-       commentLineStartsWith: '#'
-       encoding:  UTF-8
-       file:  csv/stations.csv    
-       quotchar:  '"'
-       relativeToChangelogFile:  true  
-       tableName:  tube_station
-       separator: ','
-       usePreparedStatements:  true
+    id: loadData-tubestation-zones
+    author: janaldous
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: id
+            type: COMPUTED
+        - column:
+            header: Station Name
+            name: station_name
+            type: STRING
+        - column:
+            header: Address
+            name: address
+            type: STRING
+        - column:
+            header: Post Code District
+            name: post_code_district
+            type: STRING
+        - column:
+            header: Zone
+            name: zone
+            type: NUMERIC
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: csv/stations.csv
+        quotchar: '"'
+        relativeToChangelogFile: true
+        tableName: tube_station
+        separator: ','
+        usePreparedStatements: true
 - changeSet:
     id: createSequence-jobapplication
     author: janaldous
@@ -539,4 +539,16 @@ databaseChangeLog:
         onUpdate: NO ACTION
         referencedColumnNames: id
         referencedTableName: company_sponsor
+        validate: true
+- changeSet:
+    id: addUniqueConstraint-jobapplication-company-sponsor
+    author: janaldous
+    changes:
+    - addUniqueConstraint:
+        columnNames: company_sponsor_id
+        constraintName: companysponsor-unique
+        deferrable: true
+        disabled: true
+        initiallyDeferred: true
+        tableName: job_application
         validate: true
