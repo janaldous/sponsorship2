@@ -7,10 +7,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +54,9 @@ class TflLineApiTest {
 		return MessageFormat.format("{0},{1},\"{2}\",{3}", name, zone, address, postcode);
 	};
 
+	@Disabled
 	@Test
+	// make sure to only run this once, since there were manual corrections to the CSV
 	void testCallApi_thenWriteCSVToFile() throws IOException {
 		List<TflApiPresentationEntitiesLine> result = tflLineApi.getLinesByMode("Regular", "tube", "dlr");
 		assertNotNull(result);
@@ -60,19 +65,19 @@ class TflLineApiTest {
 		String lineIds = result.stream().map(TflApiPresentationEntitiesLine::getId).collect(Collectors.joining(","));
 		log.info("line ids: " + lineIds);
 
-		List<String> csv = result.stream().map(TflApiPresentationEntitiesLine::getId).map(lineId -> {
+		Set<String> csv = result.stream().map(TflApiPresentationEntitiesLine::getId).map(lineId -> {
 			List<TflApiPresentationEntitiesStopPoint> stops = tflLineApi.getStopsInLine(lineId, false);
 			log.info(MessageFormat.format("lineId = {0} no of stops = {1}", lineId, stops.size()));
-			return stops.stream().map(mapToCSVRow).collect(Collectors.toList());
-		}).flatMap(List::stream).collect(Collectors.toList());
+			return stops.stream().map(mapToCSVRow).collect(Collectors.toSet());
+		}).flatMap(Set::stream).collect(Collectors.toSet());
 
 		csv.forEach(System.out::println);
 
-		writeToFile("src/main/resources/db/changelog/csv/stations.csv", csv,
-				new String[] { "Station Name", "Zone", "Address", "Post Code" });
+		writeToFile("src/main/resources/db/changelog/csv/stations2.csv", csv,
+				new String[] { "Station Name", "Zone", "Address", "Post Code District" });
 	}
 
-	private void writeToFile(String filename, List<String> lines, String[] headers) throws IOException {
+	private void writeToFile(String filename, Collection<String> lines, String[] headers) throws IOException {
 		try (FileWriter writer = new FileWriter(filename)) {
 			// header
 			writer.write(Arrays.stream(headers).collect(Collectors.joining(",")) + System.lineSeparator());

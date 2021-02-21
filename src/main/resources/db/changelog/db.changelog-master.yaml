@@ -437,7 +437,7 @@ databaseChangeLog:
             name: address
             type: VARCHAR(255)
         - column:
-            name: post_code
+            name: post_code_district
             type: VARCHAR(20)
         - column:
             name: zone
@@ -461,8 +461,8 @@ databaseChangeLog:
            name: address
            type: STRING
         - column:    
-           header: Post Code
-           name: post_code
+           header: Post Code District
+           name: post_code_district
            type: STRING
         - column:    
            header: Zone
