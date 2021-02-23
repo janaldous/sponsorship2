@@ -36,7 +36,7 @@ public class JobApplicationService {
 	
 	public JobApplicationDto createApplication(JobApplicationCreateDto jobApplicationCreateRequest) {
 		CompanySponsor companySponsor = companySponsorRepository.findById(jobApplicationCreateRequest.getCompanySponsorId())
-			.orElseThrow(() -> new ResourceNotFoundException("Company sponsor was not found. id = " + jobApplicationCreateRequest));
+			.orElseThrow(() -> new ResourceNotFoundException("Company sponsor was not found id = " + jobApplicationCreateRequest));
 		
 		JobApplication jobApplication = new JobApplication();
 		jobApplication.setCompanySponsor(companySponsor)
