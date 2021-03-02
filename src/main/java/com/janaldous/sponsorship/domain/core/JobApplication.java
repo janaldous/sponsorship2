@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.domain.core;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,11 +30,11 @@ public class JobApplication {
 	
 	@CreationTimestamp
 	@Column(name = "date_created")
-	private Date dateCreated;
+	private LocalDateTime dateCreated;
 	
 	@UpdateTimestamp
 	@Column(name = "date_updated")
-	private Date dateUpdated;
+	private LocalDateTime dateUpdated;
 	
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "company_sponsor_id", referencedColumnName = "id")

@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.dto.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.janaldous.sponsorship.domain.core.ApplicationMethod;
 import com.janaldous.sponsorship.domain.core.ApplicationStatus;
@@ -16,9 +16,9 @@ public class JobApplicationDto {
 	
 	private Long id;
 	
-	private Date dateCreated;
+	private LocalDateTime dateCreated;
 	
-	private Date dateUpdated;
+	private LocalDateTime dateUpdated;
 	
 	private CompanySponsor companySponsor;
 	

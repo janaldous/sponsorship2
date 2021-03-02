@@ -32,6 +32,7 @@ class PDFSponsorRepositoryTest {
 		assertEquals(14, sponsors.size());
 	}
 	
+	@Disabled
 	@Test
 	void testFindByIndustryAndNullFetchStatus() {
 		List<PDFSponsor> sponsors = pdfSponsorRepository.findAllByIndustryAndNullFetchStatus("Computer Programming", PageRequest.of(0, 14));

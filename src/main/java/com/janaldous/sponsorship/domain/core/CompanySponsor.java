@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.domain.core;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,7 +39,7 @@ public class CompanySponsor {
 	
 	@Column(name = "date_updated")
 	@UpdateTimestamp
-	private Date dateUpdated;
+	private LocalDateTime dateUpdated;
 	
 	@Column(name = "name_matches")
 	private Boolean nameMatches;

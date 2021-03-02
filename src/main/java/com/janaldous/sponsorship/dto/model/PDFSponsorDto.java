@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.dto.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -21,6 +21,6 @@ public class PDFSponsorDto {
 	
 	private String subTier;
 	
-	private Date dateAdded;
+	private LocalDateTime dateAdded;
 	
 }

@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.dto.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.janaldous.sponsorship.domain.core.FetchDataStatus;
 
@@ -19,7 +19,7 @@ public class CompanySponsorDto {
 	
 	private FetchDataStatus fetchDataStatus;
 	
-	private Date dateUpdated;
+	private LocalDateTime dateUpdated;
 	
 	private Boolean nameMatches;
 	

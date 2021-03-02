@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class JobApplicationService {
 		
 		JobApplication jobApplication = new JobApplication();
 		jobApplication.setCompanySponsor(companySponsor)
-			.setDateCreated(new Date())
+			.setDateCreated(LocalDateTime.now())
 			.setApplicationMethod(jobApplicationCreateRequest.getApplicationMethod())
 			.setStatus(jobApplicationCreateRequest.getStatus())
 			.setTechCompanyType(jobApplicationCreateRequest.getTechCompanyType())

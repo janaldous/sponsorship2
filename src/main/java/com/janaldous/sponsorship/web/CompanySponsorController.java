@@ -15,7 +15,7 @@ import com.janaldous.sponsorship.dto.model.TubeStationDto;
 import com.janaldous.sponsorship.repository.tfl.TflAddressUtil;
 import com.janaldous.sponsorship.service.CompanySponsorService;
 import com.janaldous.sponsorship.service.TubeStationService;
-import com.janaldous.sponsorship.webdto.CompanySponsorDetailResponse;
+import com.janaldous.sponsorship.webdto.model.CompanySponsorDetailResponse;
 
 @RestController
 public class CompanySponsorController {
