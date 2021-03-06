@@ -40,7 +40,7 @@ public class JobApplicationService {
 		
 		JobApplication jobApplication = new JobApplication();
 		jobApplication.setCompanySponsor(companySponsor)
-			.setDateCreated(LocalDateTime.now())
+			.setTimestamp(LocalDateTime.now())
 			.setApplicationMethod(jobApplicationCreateRequest.getApplicationMethod())
 			.setStatus(jobApplicationCreateRequest.getStatus())
 			.setTechCompanyType(jobApplicationCreateRequest.getTechCompanyType())
@@ -48,6 +48,12 @@ public class JobApplicationService {
 			.setEmail(jobApplicationCreateRequest.getEmail());
 		
 		return JobApplicationMapper.toJobApplicationDto(jobApplicationRepository.save(jobApplication));
+	}
+
+	public JobApplicationDto getApplicationByCompanySponsorId(Long companySponsorId) {
+		return jobApplicationRepository.findByCompanySponsor(companySponsorId)
+			.map(JobApplicationMapper::toJobApplicationDto)
+			.orElseThrow(() -> new ResourceNotFoundException("Job application with company sponsor was not found id = " + companySponsorId));
 	}
 
 }

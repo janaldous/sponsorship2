@@ -2,6 +2,11 @@ databaseChangeLog:
 - changeSet:
     id: generated-sequence-1
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: company_house_entry_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -15,6 +20,11 @@ databaseChangeLog:
 - changeSet:
     id: generated-sequence-2
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: company_sponsor_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -28,6 +38,11 @@ databaseChangeLog:
 - changeSet:
     id: generated-sequence-3
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: pdfsponsor_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -41,6 +56,11 @@ databaseChangeLog:
 - changeSet:
     id: generated-sequence-4
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: sic_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -54,6 +74,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-1
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: pdfsponsor
     changes:
     - createTable:
         columns:
@@ -87,6 +112,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-2
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: company_sponsor
     changes:
     - createTable:
         columns:
@@ -108,6 +138,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-3
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: company_house_entry
     changes:
     - createTable:
         columns:
@@ -162,6 +197,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-4
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: company_house_entry_sic_codes
     changes:
     - createTable:
         columns:
@@ -179,6 +219,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-5
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: sic
     changes:
     - createTable:
         columns:
@@ -200,6 +245,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-6
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: fkke3yp6nrb6u2lgnucbsdh07oh
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: pdf_sponsor_id
@@ -215,6 +265,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-7
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: fk1j33kuiyyjyr5wtu7mmygdy0s
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: company_house_entry_id
@@ -230,6 +285,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-8
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: fk2itnti81gon6crbxliuto1stl
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: company_house_entry_id
@@ -245,6 +305,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-9
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: fk2jwl1gily4c1kie3m4wxh9ma8
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: sic_codes_id
@@ -260,6 +325,11 @@ databaseChangeLog:
 - changeSet:
     id: loadData-uktiersponsors
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - sqlCheck:
+        expectedResult: 0
+        sql: SELECT COUNT(*) FROM pdfsponsor
     changes:
     - loadData:
         columns:
@@ -301,6 +371,11 @@ databaseChangeLog:
 - changeSet:
     id: loadData-siccodes
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - sqlCheck:
+        expectedResult: 0
+        sql: SELECT COUNT(*) FROM sic
     changes:
     - loadData:
         columns:
@@ -326,6 +401,12 @@ databaseChangeLog:
 - changeSet:
     id: addColumn-fetchdatastatus
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: company_sponsor
+          columnName: fetch_data_status
     changes:
     - addColumn:
         tableName: company_sponsor
@@ -335,6 +416,11 @@ databaseChangeLog:
 - changeSet:
     id: loadData-uktiersponsors-all
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - sqlCheck:
+        expectedResult: 0
+        sql: SELECT COUNT(*) FROM pdfsponsor
     changes:
     - loadData:
         columns:
@@ -376,6 +462,12 @@ databaseChangeLog:
 - changeSet:
     id: alterColumn-companyhouseentry
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: company_house_entry
+          columnName: company_number
     changes:
     - modifyDataType:
         tableName: company_house_entry
@@ -384,6 +476,12 @@ databaseChangeLog:
 - changeSet:
     id: addColumn-companysponsor-dateupdated
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: company_sponsor
+          columnName: date_updated
     changes:
     - addColumn:
         tableName: company_sponsor
@@ -393,6 +491,17 @@ databaseChangeLog:
 - changeSet:
     id: addColumn-companysponsor-matchinfo
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - and:
+      - not:
+          columnExists:
+            tableName: company_sponsor
+            columnName: date_updated
+      - not:
+          columnExists:
+            tableName: company_sponsor
+            columnName: locality_matches
     changes:
     - addColumn:
         tableName: company_sponsor
@@ -406,6 +515,11 @@ databaseChangeLog:
 - changeSet:
     id: sequence-tubestations
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: tube_station_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -419,6 +533,11 @@ databaseChangeLog:
 - changeSet:
     id: createTable-tubestations
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: tube_station
     changes:
     - createTable:
         columns:
@@ -446,6 +565,12 @@ databaseChangeLog:
 - changeSet:
     id: loadData-tubestation-zones
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM tube_station
     changes:
     - loadData:
         columns:
@@ -479,6 +604,11 @@ databaseChangeLog:
 - changeSet:
     id: createSequence-jobapplication
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: job_application_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -492,6 +622,11 @@ databaseChangeLog:
 - changeSet:
     id: createTable-jobapplication
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: job_application
     changes:
     - createTable:
         columns:
@@ -504,10 +639,7 @@ databaseChangeLog:
             name: id
             type: BIGINT
         - column:
-            name: date_created
-            type: TIMESTAMP
-        - column:
-            name: date_updated
+            name: timestamp
             type: TIMESTAMP
         - column:
             name: company_sponsor_id
@@ -528,6 +660,11 @@ databaseChangeLog:
 - changeSet:
     id: jobapplication-companysponsor-fkey
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: companysponsor-fkey
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: company_sponsor_id

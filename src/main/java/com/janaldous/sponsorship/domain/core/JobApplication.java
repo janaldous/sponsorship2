@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -29,12 +28,8 @@ public class JobApplication {
 	private Long id;
 	
 	@CreationTimestamp
-	@Column(name = "date_created")
-	private LocalDateTime dateCreated;
-	
-	@UpdateTimestamp
-	@Column(name = "date_updated")
-	private LocalDateTime dateUpdated;
+	@Column(name = "timestamp")
+	private LocalDateTime timestamp;
 	
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "company_sponsor_id", referencedColumnName = "id")
