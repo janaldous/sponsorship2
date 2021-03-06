@@ -69,5 +69,11 @@ public class JobApplication {
 	 */
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "notes")
+	private String notes;
+	
+	@Column(name = "linkedin_url")
+	private String linkedInUrl;
 
 }

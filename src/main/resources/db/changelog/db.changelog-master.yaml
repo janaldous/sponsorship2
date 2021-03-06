@@ -700,3 +700,16 @@ databaseChangeLog:
         - column:
            name: categories
            type: varchar(50) []
+- changeSet:
+    id: jobapplicaton-addcolumn-notes
+    author: janaldous
+    changes:
+    - addColumn:
+        tableName: job_application
+        columns:
+        - column: 
+           name: notes
+           type: varchar(255)
+        - column: 
+           name: linkedin_url
+           type: varchar(255)

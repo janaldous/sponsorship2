@@ -20,7 +20,9 @@ public class JobApplicationMapper {
 				.setApplicationMethod(input.getApplicationMethod())
 				.setStatus(input.getStatus())
 				.setWebsite(input.getWebsite())
-				.setEmail(input.getEmail());
+				.setEmail(input.getEmail())
+				.setLinkedInUrl(input.getLinkedInUrl())
+				.setNotes(input.getNotes());
 
 		if (input.getCategories() != null) {
 			output.setCategories(input.getCategories()
@@ -47,7 +49,9 @@ public class JobApplicationMapper {
 			.setTimestamp(input.getTimestamp())
 			.setCompanySponsorId(input.getCompanySponsor().getId())
 			.setEmail(input.getEmail())
-			.setWebsite(input.getWebsite());
+			.setWebsite(input.getWebsite())
+			.setLinkedInUrl(input.getLinkedInUrl())
+			.setNotes(input.getNotes());
 		
 		if (input.getCategories() != null) {
 			output.setCategories(Arrays.stream(input.getCategories()).map(x -> TechCompanyCategory.valueOf(x)).collect(Collectors.toList()));
