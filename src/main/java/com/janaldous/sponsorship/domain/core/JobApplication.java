@@ -16,10 +16,12 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Accessors(chain = true)
 public class JobApplication {
 	

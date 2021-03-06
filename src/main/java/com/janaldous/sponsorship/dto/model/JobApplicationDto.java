@@ -16,11 +16,9 @@ public class JobApplicationDto {
 	
 	private Long id;
 	
-	private LocalDateTime dateCreated;
+	private LocalDateTime timestamp;
 	
-	private LocalDateTime dateUpdated;
-	
-	private CompanySponsor companySponsor;
+	private Long companySponsorId;
 	
 	private ApplicationMethod applicationMethod;
 	

@@ -1,6 +1,8 @@
 package com.janaldous.sponsorship.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,10 +52,13 @@ public class JobApplicationService {
 		return JobApplicationMapper.toJobApplicationDto(jobApplicationRepository.save(jobApplication));
 	}
 
-	public JobApplicationDto getApplicationByCompanySponsorId(Long companySponsorId) {
-		return jobApplicationRepository.findByCompanySponsor(companySponsorId)
-			.map(JobApplicationMapper::toJobApplicationDto)
-			.orElseThrow(() -> new ResourceNotFoundException("Job application with company sponsor was not found id = " + companySponsorId));
+	public List<JobApplicationDto> getApplicationByCompanySponsorId(Long companySponsorId) {
+		List<JobApplication> jobApplications = jobApplicationRepository.findByCompanySponsor(companySponsorId);
+		if (jobApplications.isEmpty()) {
+			throw new ResourceNotFoundException("Job application with company sponsor was not found id = " + companySponsorId);
+		} else {
+			return jobApplications.stream().map(JobApplicationMapper::toJobApplicationDto).collect(Collectors.toList());
+		}
 	}
 
 }

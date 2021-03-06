@@ -651,6 +651,9 @@ databaseChangeLog:
             name: tech_company_type
             type: VARCHAR(50)
         - column:
+            name: application_method
+            type: VARCHAR(50)
+        - column:
             name: website
             type: VARCHAR(255)
         - column:
