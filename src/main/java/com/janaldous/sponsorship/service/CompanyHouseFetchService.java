@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,7 +61,7 @@ public class CompanyHouseFetchService {
 			CompanySponsor companySponsor = optionalCompanySponsor.orElse(new CompanySponsor());
 			companySponsor.setPdfSponsor(PDFSponsorMapper.toPDFSponsorEntity(pdfSponsor));
 			// TODO remove me
-			companySponsor.setDateUpdated(new Date());
+			companySponsor.setDateUpdated(LocalDateTime.now());
 
 			if (results.size() == 1) {
 				CompanyHouseEntry companyHouseEntry = companySponsor.getCompanyHouseEntry();

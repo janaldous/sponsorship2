@@ -2,6 +2,11 @@ databaseChangeLog:
 - changeSet:
     id: generated-sequence-1
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: company_house_entry_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -15,6 +20,11 @@ databaseChangeLog:
 - changeSet:
     id: generated-sequence-2
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: company_sponsor_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -28,6 +38,11 @@ databaseChangeLog:
 - changeSet:
     id: generated-sequence-3
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: pdfsponsor_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -41,6 +56,11 @@ databaseChangeLog:
 - changeSet:
     id: generated-sequence-4
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: sic_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -54,6 +74,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-1
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: pdfsponsor
     changes:
     - createTable:
         columns:
@@ -87,6 +112,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-2
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: company_sponsor
     changes:
     - createTable:
         columns:
@@ -108,6 +138,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-3
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: company_house_entry
     changes:
     - createTable:
         columns:
@@ -162,6 +197,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-4
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: company_house_entry_sic_codes
     changes:
     - createTable:
         columns:
@@ -179,6 +219,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-5
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: sic
     changes:
     - createTable:
         columns:
@@ -200,6 +245,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-6
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: fkke3yp6nrb6u2lgnucbsdh07oh
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: pdf_sponsor_id
@@ -215,6 +265,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-7
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: fk1j33kuiyyjyr5wtu7mmygdy0s
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: company_house_entry_id
@@ -230,6 +285,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-8
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: fk2itnti81gon6crbxliuto1stl
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: company_house_entry_id
@@ -245,6 +305,11 @@ databaseChangeLog:
 - changeSet:
     id: 1613048779706-9
     author: USER (generated)
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: fk2jwl1gily4c1kie3m4wxh9ma8
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: sic_codes_id
@@ -258,154 +323,203 @@ databaseChangeLog:
         referencedTableName: sic
         validate: true
 - changeSet:
-   id: loadData-uktiersponsors  
-   author: janaldous
-   changes:    
-    - loadData:    
-       columns: 
-        - column: 
-           name: id
-           type: COMPUTED
-        - column: 
-           name: company_name
-           index: 0
-           type: STRING
-        - column:    
-           header: Town
-           name: town
-           type: STRING
-        - column:    
-           header: Industry
-           name: industry
-           type:  STRING
-        - column:    
-           header: Main Tier
-           name:  main_tier
-           type:  STRING
-        - column:    
-           header: Sub Tier
-           name:  sub_tier
-           type:  STRING
-        - column:    
-           header: Date Added
-           name:  date_added
-           type:  DATE
-       commentLineStartsWith: '#'
-       encoding:  UTF-8
-       file:  csv/UkTiersponsors_Recent_Semicolon_Delimiter.csv    
-       quotchar:  '"'
-       relativeToChangelogFile:  true  
-       tableName:  pdfsponsor
-       separator: ';'
-       usePreparedStatements:  true
+    id: loadData-uktiersponsors
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - sqlCheck:
+        expectedResult: 0
+        sql: SELECT COUNT(*) FROM pdfsponsor
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: id
+            type: COMPUTED
+        - column:
+            name: company_name
+            index: 0
+            type: STRING
+        - column:
+            header: Town
+            name: town
+            type: STRING
+        - column:
+            header: Industry
+            name: industry
+            type: STRING
+        - column:
+            header: Main Tier
+            name: main_tier
+            type: STRING
+        - column:
+            header: Sub Tier
+            name: sub_tier
+            type: STRING
+        - column:
+            header: Date Added
+            name: date_added
+            type: DATE
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: csv/UkTiersponsors_Recent_Semicolon_Delimiter.csv
+        quotchar: '"'
+        relativeToChangelogFile: true
+        tableName: pdfsponsor
+        separator: ;
+        usePreparedStatements: true
 - changeSet:
-   id: loadData-siccodes  
-   author: janaldous
-   changes:    
-    - loadData:    
-       columns: 
-        - column: 
-           name: id
-           type: COMPUTED
-        - column: 
-           header: SIC Code
-           name: code
-           type: NUMERIC
-        - column:    
-           header: Description
-           name: description
-           type: STRING
-       commentLineStartsWith: '#'
-       encoding:  UTF-8
-       file:  csv/SIC07_CH_condensed_list_en.csv    
-       quotchar:  '"'
-       relativeToChangelogFile:  true  
-       tableName:  sic
-       separator: ','
-       usePreparedStatements:  true
+    id: loadData-siccodes
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - sqlCheck:
+        expectedResult: 0
+        sql: SELECT COUNT(*) FROM sic
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: id
+            type: COMPUTED
+        - column:
+            header: SIC Code
+            name: code
+            type: NUMERIC
+        - column:
+            header: Description
+            name: description
+            type: STRING
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: csv/SIC07_CH_condensed_list_en.csv
+        quotchar: '"'
+        relativeToChangelogFile: true
+        tableName: sic
+        separator: ','
+        usePreparedStatements: true
 - changeSet:
-   id: addColumn-fetchdatastatus
-   author: janaldous
-   changes:
-     - addColumn:
+    id: addColumn-fetchdatastatus
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: company_sponsor
+          columnName: fetch_data_status
+    changes:
+    - addColumn:
         tableName: company_sponsor
         columns:
-           name: fetch_data_status
-           type: VARCHAR(50)
+          name: fetch_data_status
+          type: VARCHAR(50)
 - changeSet:
-   id: loadData-uktiersponsors-all
-   author: janaldous
-   changes:    
-    - loadData:    
-       columns: 
-        - column: 
-           name: id
-           type: COMPUTED
-        - column: 
-           name: company_name
-           index: 0
-           type: STRING
-        - column:    
-           header: Town
-           name: town
-           type: STRING
-        - column:    
-           header: Industry
-           name: industry
-           type:  STRING
-        - column:    
-           header: Main Tier
-           name:  main_tier
-           type:  STRING
-        - column:    
-           header: Sub Tier
-           name:  sub_tier
-           type:  STRING
-        - column:    
-           header: Date Added
-           name:  date_added
-           type:  DATE
-       commentLineStartsWith: '#'
-       encoding:  UTF-8
-       file:  csv/UkTiersponsors_All_Semicolon_Delimiter.csv    
-       quotchar:  '"'
-       relativeToChangelogFile:  true  
-       tableName:  pdfsponsor
-       separator: ';'
-       usePreparedStatements:  true
+    id: loadData-uktiersponsors-all
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - sqlCheck:
+        expectedResult: 0
+        sql: SELECT COUNT(*) FROM pdfsponsor
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: id
+            type: COMPUTED
+        - column:
+            name: company_name
+            index: 0
+            type: STRING
+        - column:
+            header: Town
+            name: town
+            type: STRING
+        - column:
+            header: Industry
+            name: industry
+            type: STRING
+        - column:
+            header: Main Tier
+            name: main_tier
+            type: STRING
+        - column:
+            header: Sub Tier
+            name: sub_tier
+            type: STRING
+        - column:
+            header: Date Added
+            name: date_added
+            type: DATE
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: csv/UkTiersponsors_All_Semicolon_Delimiter.csv
+        quotchar: '"'
+        relativeToChangelogFile: true
+        tableName: pdfsponsor
+        separator: ;
+        usePreparedStatements: true
 - changeSet:
-   id: alterColumn-companyhouseentry
-   author: janaldous
-   changes:
-     - modifyDataType:
+    id: alterColumn-companyhouseentry
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: company_house_entry
+          columnName: company_number
+    changes:
+    - modifyDataType:
         tableName: company_house_entry
         columnName: company_number
         newDataType: VARCHAR(255)
 - changeSet:
-   id: addColumn-companysponsor-dateupdated
-   author: janaldous
-   changes:
-     - addColumn:
+    id: addColumn-companysponsor-dateupdated
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: company_sponsor
+          columnName: date_updated
+    changes:
+    - addColumn:
         tableName: company_sponsor
         columns:
-           name: date_updated
-           type: DATETIME
+          name: date_updated
+          type: DATETIME
 - changeSet:
-   id: addColumn-companysponsor-matchinfo
-   author: janaldous
-   changes:
-     - addColumn:
+    id: addColumn-companysponsor-matchinfo
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - and:
+      - not:
+          columnExists:
+            tableName: company_sponsor
+            columnName: date_updated
+      - not:
+          columnExists:
+            tableName: company_sponsor
+            columnName: locality_matches
+    changes:
+    - addColumn:
         tableName: company_sponsor
         columns:
-        - column: 
-           name: name_matches
-           type: BOOLEAN
         - column:
-           name: locality_matches
-           type: BOOLEAN
+            name: name_matches
+            type: BOOLEAN
+        - column:
+            name: locality_matches
+            type: BOOLEAN
 - changeSet:
     id: sequence-tubestations
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: tube_station_id_seq
     changes:
     - createSequence:
         cacheSize: 1
@@ -419,6 +533,11 @@ databaseChangeLog:
 - changeSet:
     id: createTable-tubestations
     author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: tube_station
     changes:
     - createTable:
         columns:
@@ -444,35 +563,132 @@ databaseChangeLog:
             type: INT
         tableName: tube_station
 - changeSet:
-   id: loadData-tubestation-zones
-   author: janaldous
-   changes:    
-    - loadData:    
-       columns: 
-        - column: 
-           name: id
-           type: COMPUTED
-        - column: 
-           header: Station Name
-           name: station_name
-           type: STRING
-        - column:    
-           header: Address
-           name: address
-           type: STRING
-        - column:    
-           header: Post Code District
-           name: post_code_district
-           type: STRING
-        - column:    
-           header: Zone
-           name: zone
-           type:  NUMERIC
-       commentLineStartsWith: '#'
-       encoding:  UTF-8
-       file:  csv/stations.csv    
-       quotchar:  '"'
-       relativeToChangelogFile:  true  
-       tableName:  tube_station
-       separator: ','
-       usePreparedStatements:  true
+    id: loadData-tubestation-zones
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM tube_station
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: id
+            type: COMPUTED
+        - column:
+            header: Station Name
+            name: station_name
+            type: STRING
+        - column:
+            header: Address
+            name: address
+            type: STRING
+        - column:
+            header: Post Code District
+            name: post_code_district
+            type: STRING
+        - column:
+            header: Zone
+            name: zone
+            type: NUMERIC
+        commentLineStartsWith: '#'
+        encoding: UTF-8
+        file: csv/stations.csv
+        quotchar: '"'
+        relativeToChangelogFile: true
+        tableName: tube_station
+        separator: ','
+        usePreparedStatements: true
+- changeSet:
+    id: createSequence-jobapplication
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        sequenceExists:
+          sequence: job_application_id_seq
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 1
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: job_application_id_seq
+        startValue: 1
+- changeSet:
+    id: createTable-jobapplication
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        tableExists:
+          tableName: job_application
+    changes:
+    - createTable:
+        columns:
+        - column:
+            defaultValueSequenceNext: job_application_id_seq
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: job_application_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: timestamp
+            type: TIMESTAMP
+        - column:
+            name: company_sponsor_id
+            type: BIGINT
+        - column:
+            name: status
+            type: VARCHAR(50)
+        - column:
+            name: tech_company_type
+            type: VARCHAR(50)
+        - column:
+            name: application_method
+            type: VARCHAR(50)
+        - column:
+            name: website
+            type: VARCHAR(255)
+        - column:
+            name: email
+            type: VARCHAR(255)
+        tableName: job_application
+- changeSet:
+    id: jobapplication-companysponsor-fkey
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        foreignKeyConstraintExists:
+          foreignKeyName: companysponsor-fkey
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: company_sponsor_id
+        baseTableName: job_application
+        constraintName: companysponsor-fkey
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: company_sponsor
+        validate: true
+- changeSet:
+    id: addUniqueConstraint-jobapplication-company-sponsor
+    author: janaldous
+    changes:
+    - addUniqueConstraint:
+        columnNames: company_sponsor_id
+        constraintName: companysponsor-unique
+        deferrable: true
+        disabled: true
+        initiallyDeferred: true
+        tableName: job_application
+        validate: true

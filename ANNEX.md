@@ -10,3 +10,5 @@ Generating sponsorship api client:
 - OAS3 was used. See <https://www.baeldung.com/spring-rest-openapi-documentation>
 
 Note about getting TFL underground and DLR stations and zones: see TflLineApiTest.testCallApi_thenWriteCSVToFile to run API calls to fetch stations information. Make sure to manually correct the post code districts.
+
+- Dockerized application + added springdevtools as seen in: <https://www.youtube.com/watch?v=1w1Jv9qssqg>

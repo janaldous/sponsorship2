@@ -1,4 +1,4 @@
-package com.janaldous.sponsorship.webdto;
+package com.janaldous.sponsorship.webdto.model;
 
 import java.util.List;
 

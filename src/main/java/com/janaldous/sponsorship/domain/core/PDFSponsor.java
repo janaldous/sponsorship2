@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.domain.core;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +31,6 @@ public class PDFSponsor {
 	
 	private String subTier;
 	
-	private Date dateAdded;
+	private LocalDateTime dateAdded;
 	
 }

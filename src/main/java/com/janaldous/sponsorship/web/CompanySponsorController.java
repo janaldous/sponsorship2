@@ -15,7 +15,7 @@ import com.janaldous.sponsorship.dto.model.TubeStationDto;
 import com.janaldous.sponsorship.repository.tfl.TflAddressUtil;
 import com.janaldous.sponsorship.service.CompanySponsorService;
 import com.janaldous.sponsorship.service.TubeStationService;
-import com.janaldous.sponsorship.webdto.CompanySponsorDetailResponse;
+import com.janaldous.sponsorship.webdto.model.CompanySponsorDetailResponse;
 
 @RestController
 public class CompanySponsorController {
@@ -32,13 +32,13 @@ public class CompanySponsorController {
 	}
 
 	@GetMapping("/company")
-	public Page<CompanySponsorDto> getCompanyHouseEntry(@RequestParam int page, @RequestParam int size,
+	public Page<CompanySponsorDto> getCompanySponsor(@RequestParam int page, @RequestParam int size,
 			@RequestParam int zone) {
 		return companySponsorService.getCompanySponsorsByTflZone(zone, PageRequest.of(page, size));
 	}
 
 	@GetMapping("/company/{id}")
-	public CompanySponsorDetailResponse getCompanyHouseEntryById(@PathVariable Long id) {
+	public CompanySponsorDetailResponse getCompanySponsorById(@PathVariable Long id) {
 		CompanySponsorDetailResponse response = new CompanySponsorDetailResponse();
 		CompanySponsorDto companySponsor = companySponsorService.getCompanySponsorById(id);
 		response.setCompanySponsor(companySponsor);
