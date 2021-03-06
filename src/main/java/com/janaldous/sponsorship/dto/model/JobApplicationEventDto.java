@@ -1,10 +1,13 @@
 package com.janaldous.sponsorship.dto.model;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import com.janaldous.sponsorship.domain.core.ApplicationMethod;
 import com.janaldous.sponsorship.domain.core.ApplicationStatus;
 import com.janaldous.sponsorship.domain.core.TechCompanyCategory;
+import com.janaldous.sponsorship.domain.core.Technology;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +17,7 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class JobApplicationCreateDto {
+public class JobApplicationEventDto {
 
 	@NotNull(message = "Company Sponsor id is mandatory")
 	@NonNull
@@ -26,8 +29,9 @@ public class JobApplicationCreateDto {
 	@NonNull
 	private ApplicationStatus status;
 
-	@NonNull
-	private TechCompanyCategory techCompanyType;
+	private List<TechCompanyCategory> categories;
+	
+	private List<Technology> techStack;
 
 	private String website;
 

@@ -680,3 +680,23 @@ databaseChangeLog:
         referencedColumnNames: id
         referencedTableName: company_sponsor
         validate: true
+- changeSet:
+    id: jobapplication-dropcolumn
+    author: janaldous
+    changes:
+    - dropColumn:
+       columnName: tech_company_type
+       tableName: job_application
+- changeSet:
+    id: jobapplicaton-addcolumn-techstack
+    author: janaldous
+    changes:
+    - addColumn:
+        tableName: job_application
+        columns:
+        - column: 
+           name: tech_stack
+           type: varchar(50) []
+        - column:
+           name: categories
+           type: varchar(50) []
