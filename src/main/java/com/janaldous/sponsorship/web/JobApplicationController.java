@@ -2,6 +2,8 @@ package com.janaldous.sponsorship.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +33,7 @@ public class JobApplicationController {
 	}
 	
 	@PostMapping("/jobapplication")
-	public JobApplicationDto postNewJobApplication(@RequestBody JobApplicationCreateDto jobApplicationCreateRequest) {
+	public JobApplicationDto postNewJobApplication(@Valid @RequestBody JobApplicationCreateDto jobApplicationCreateRequest) {
 		return jobApplicationService.createApplication(jobApplicationCreateRequest);
 	}
 	
