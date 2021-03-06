@@ -12,3 +12,5 @@ Generating sponsorship api client:
 Note about getting TFL underground and DLR stations and zones: see TflLineApiTest.testCallApi_thenWriteCSVToFile to run API calls to fetch stations information. Make sure to manually correct the post code districts.
 
 - Dockerized application + added springdevtools as seen in: <https://www.youtube.com/watch?v=1w1Jv9qssqg>
+
+- Postgresql Array with Hibernate: <https://vladmihalcea.com/map-postgresql-enum-array-jpa-entity-property-hibernate/>

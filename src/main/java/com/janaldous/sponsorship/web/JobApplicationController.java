@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.janaldous.sponsorship.dto.model.JobApplicationCreateDto;
+import com.janaldous.sponsorship.dto.model.JobApplicationEventDto;
 import com.janaldous.sponsorship.dto.model.JobApplicationDto;
 import com.janaldous.sponsorship.service.JobApplicationService;
 
@@ -33,8 +33,8 @@ public class JobApplicationController {
 	}
 	
 	@PostMapping("/jobapplication")
-	public JobApplicationDto postNewJobApplication(@Valid @RequestBody JobApplicationCreateDto jobApplicationCreateRequest) {
-		return jobApplicationService.createApplication(jobApplicationCreateRequest);
+	public JobApplicationDto postNewJobApplication(@Valid @RequestBody JobApplicationEventDto jobApplicationEventRequest) {
+		return jobApplicationService.handleJobApplicationEvent(jobApplicationEventRequest);
 	}
 	
 }
