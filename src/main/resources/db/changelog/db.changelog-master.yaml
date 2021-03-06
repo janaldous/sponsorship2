@@ -680,15 +680,3 @@ databaseChangeLog:
         referencedColumnNames: id
         referencedTableName: company_sponsor
         validate: true
-- changeSet:
-    id: addUniqueConstraint-jobapplication-company-sponsor
-    author: janaldous
-    changes:
-    - addUniqueConstraint:
-        columnNames: company_sponsor_id
-        constraintName: companysponsor-unique
-        deferrable: true
-        disabled: true
-        initiallyDeferred: true
-        tableName: job_application
-        validate: true
