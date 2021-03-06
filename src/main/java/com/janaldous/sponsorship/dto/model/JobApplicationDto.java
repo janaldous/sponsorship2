@@ -39,6 +39,10 @@ public class JobApplicationDto {
 	
 	private String website;
 	
+	private String linkedInUrl;
+	
 	private String email;
+	
+	private String notes;
 
 }

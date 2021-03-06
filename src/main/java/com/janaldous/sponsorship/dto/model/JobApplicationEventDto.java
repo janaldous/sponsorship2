@@ -35,6 +35,10 @@ public class JobApplicationEventDto {
 
 	private String website;
 
+	private String linkedInUrl;
+	
 	private String email;
+	
+	private String notes;
 
 }
