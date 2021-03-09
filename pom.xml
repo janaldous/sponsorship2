@@ -16,9 +16,7 @@
 	<description>UK Tier 2 visa sponsors service</description>
 	<properties>
 		<java.version>11</java.version>
-		<companyhouse.version>1.0.4</companyhouse.version>
 		<springdoc.version>1.5.2</springdoc.version>
-		<tfl.version>1.0.0</tfl.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -71,7 +69,7 @@
 		<dependency>
 			<groupId>com.janaldous</groupId>
 			<artifactId>company-house-client</artifactId>
-			<version>${companyhouse.version}</version>
+			<version>1.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.janaldous</groupId>
@@ -81,7 +79,17 @@
 		<dependency>
 			<groupId>com.janaldous</groupId>
 			<artifactId>tfl-client</artifactId>
-			<version>${tfl.version}</version>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.janaldous</groupId>
+			<artifactId>postcodesio-client</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javatuples</groupId>
+			<artifactId>javatuples</artifactId>
+			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>

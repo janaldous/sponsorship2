@@ -3,8 +3,6 @@ package com.janaldous.sponsorship.dto.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.janaldous.sponsorship.domain.core.ApplicationMethod;
 import com.janaldous.sponsorship.domain.core.ApplicationStatus;
 import com.janaldous.sponsorship.domain.core.TechCompanyCategory;
