@@ -14,7 +14,8 @@ public class CompanySponsorMapper {
 			.setNameMatches(input.getNameMatches())
 			.setLocalityMatches(input.getLocalityMatches())
 			.setCompanyHouseEntry(CompanyHouseEntryMapper.toCompanyHouseEntryDto(input.getCompanyHouseEntry()))
-			.setPdfSponsor(PDFSponsorMapper.toPDFSponsorDto(input.getPdfSponsor()));
+			.setPdfSponsor(PDFSponsorMapper.toPDFSponsorDto(input.getPdfSponsor()))
+			.setChecked(input.getChecked());
 		return output;
 	}
 	

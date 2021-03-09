@@ -713,3 +713,13 @@ databaseChangeLog:
         - column: 
            name: linkedin_url
            type: varchar(255)
+- changeSet:
+    id: companysponsor-addcolumn-checked
+    author: janaldous
+    changes:
+    - addColumn:
+        tableName: company_sponsor
+        columns:
+        - column: 
+           name: checked
+           type: boolean

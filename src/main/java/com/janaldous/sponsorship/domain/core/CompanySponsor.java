@@ -47,4 +47,7 @@ public class CompanySponsor {
 	@Column(name = "locality_matches")
 	private Boolean localityMatches;
 	
+	@Column(name = "checked")
+	private Boolean checked;
+	
 }

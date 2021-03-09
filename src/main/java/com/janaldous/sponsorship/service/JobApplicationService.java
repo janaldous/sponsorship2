@@ -40,6 +40,9 @@ public class JobApplicationService {
 				.findById(jobApplicationEvent.getCompanySponsorId())
 				.orElseThrow(() -> new ResourceNotFoundException(
 						"Company sponsor was not found id = " + jobApplicationEvent));
+		
+		companySponsor.setChecked(true);
+		companySponsorRepository.save(companySponsor);
 
 		JobApplication jobApplication = JobApplicationMapper.toJobApplicationEntity(companySponsor, jobApplicationEvent);
 
