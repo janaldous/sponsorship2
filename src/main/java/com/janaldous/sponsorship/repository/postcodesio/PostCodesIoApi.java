@@ -14,9 +14,13 @@ import com.janaldous.postcodesio.dto.PostCodeDetailResponse;
 @Repository
 public class PostCodesIoApi {
 
-	@Autowired
 	private PostCodesApi postCodesApi;
 
+	@Autowired
+	public PostCodesIoApi(PostCodesApi postCodesApi) {
+		this.postCodesApi = postCodesApi;
+	}
+	
 	public Pair<BigDecimal, BigDecimal> getCoordinate(String postcode) {
 		try {
 			PostCodeDetailResponse response = postCodesApi.postCodeDetailGET(postcode);

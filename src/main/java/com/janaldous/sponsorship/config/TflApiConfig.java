@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 import com.janaldous.tfl.api.LineApi;
+import com.janaldous.tfl.api.StopPointApi;
 import com.janaldous.tfl.invoker.ApiClient;
 
 @Configuration
@@ -24,6 +25,11 @@ public class TflApiConfig {
     public LineApi lineApi() {
         return new LineApi(apiClientTfl());
     }
+	
+	@Bean
+	public StopPointApi stopPointApi() {
+		return new StopPointApi(apiClientTfl());
+	}
 	
 	@Bean
     public ApiClient apiClientTfl() {
