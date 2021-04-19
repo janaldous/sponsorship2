@@ -1,0 +1,29 @@
+version: '3'
+services:
+  sponsorship-db2:
+    container_name: sponsorship-db2
+    image: 'postgres:alpine'
+    environment:
+      POSTGRES_DATABASE: sponsorship
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_ROOT_PASSWORD: password
+      POSTGRES_ROOT_HOST: '%'
+    ports:
+      - '5432:5432'
+    restart: always
+    volumes:
+      - 'sponsorship-db-volume:/var/lib/postgresql/data'
+  sponsorship:
+    container_name: sponsorship
+    depends_on:
+      - sponsorship-db2
+    restart: always
+    env_file:
+      - env.env
+    image: 'sponsorship:0.0.1-SNAPSHOT'
+    ports:
+      - '8080:8080'
+volumes:
+  sponsorship-db-volume:
+    external: true
