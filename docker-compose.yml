@@ -24,6 +24,14 @@ services:
     image: 'sponsorship:0.0.1-SNAPSHOT'
     ports:
       - '8080:8080'
+  sponsorship-spa:
+    container_name: sponsorship-spa2
+    image: 'sponsorship-spa:0.0.2'
+    restart: always
+    ports:
+      - '8081:80'
+    depends_on: 
+      - sponsorship
 volumes:
   sponsorship-db-volume:
     external: true
