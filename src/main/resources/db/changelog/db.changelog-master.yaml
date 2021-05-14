@@ -723,3 +723,35 @@ databaseChangeLog:
         - column: 
            name: checked
            type: boolean
+- changeSet:
+    id: companyhouseentry-addcolumn-normalizedname
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: company_house_entry
+          columnName: normalized_name
+    changes:
+    - addColumn:
+        tableName: company_house_entry
+        columns:
+        - column:
+            name: normalized_name
+            type: varchar(255) 
+- changeSet:
+    id: pdfsponsor-addcolumn-normalizedname
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: pdfsponsor
+          columnName: normalized_name
+    changes:
+    - addColumn:
+        tableName: pdfsponsor
+        columns:
+        - column:
+            name: normalized_name
+            type: varchar(255)
