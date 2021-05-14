@@ -31,6 +31,9 @@ public class CompanyHouseEntry {
 	
 	@Column(name = "company_name")
 	private String companyName;
+
+	@Column(name = "normalized_name")
+	private String normalizedName;
 	
 	private String etag;
 	

@@ -23,6 +23,8 @@ public class PDFSponsor {
 	
 	private String companyName;
 	
+	private String normalizedName;
+	
 	private String town;
 	
 	private String industry;
