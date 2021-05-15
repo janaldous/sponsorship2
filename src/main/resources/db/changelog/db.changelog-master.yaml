@@ -755,3 +755,19 @@ databaseChangeLog:
         - column:
             name: normalized_name
             type: varchar(255)
+- changeSet:
+    id: companysponsor-addcolumn-fuzzymatches
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: company_sponsor
+          columnName: fuzzy_matches
+    changes:
+    - addColumn:
+        tableName: company_sponsor
+        columns:
+        - column:
+            name: fuzzy_matches
+            type: boolean

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import com.janaldous.sponsorship.repository.postgres.util.NameNormalizer;
+
 class NameNormalizerTest {
 	
 	NameNormalizer nameNormalizer = new NameNormalizer();

@@ -1,4 +1,4 @@
-package com.janaldous.sponsorship.repository.postgres.normalizer;
+package com.janaldous.sponsorship.repository.postgres.util;
 
 public class NameNormalizer {
 

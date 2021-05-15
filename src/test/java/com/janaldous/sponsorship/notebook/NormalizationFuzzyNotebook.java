@@ -32,8 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Slf4j
-@Disabled
-public class NormalizationNotebook {
+public class NormalizationFuzzyNotebook {
 
 	@Autowired
 	private CompanyHouseEntryRepository companyHouseEntryRepository;
