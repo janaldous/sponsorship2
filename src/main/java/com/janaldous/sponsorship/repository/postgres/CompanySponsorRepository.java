@@ -49,7 +49,8 @@ public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, 
 			+ "ON t.postCodeDistrict IS NOT NULL "
 			+ "AND che.addressPostCode LIKE t.postCodeDistrict || '%' "
 			+ "WHERE t.zone = :zone "
-			+ "AND cs.nameMatches = true "
+			+ "AND (cs.nameMatches = true "
+			+ "OR cs.fuzzyMatches = true) "
 			+ "GROUP BY t.zone, cs.id")
 	Page<CompanySponsorZone> findAllByTflZoneAndNameMatches(@Param("zone") Integer zone, Pageable pageable);
 
