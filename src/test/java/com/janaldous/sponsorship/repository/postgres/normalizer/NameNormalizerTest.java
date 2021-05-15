@@ -39,7 +39,10 @@ class NameNormalizerTest {
 	void testTrim2() {
 		assertEquals("Codeweavers Ltd", nameNormalizer.normalize("Codeweavers Ltd."));
 	}
-
 	
+	@Test
+	void testRemovePunctuation() {
+		assertEquals("XERO UK LTD", nameNormalizer.normalize("XERO (UK) LTD"));
+	}
 	
 }

@@ -4,6 +4,7 @@ public class NameNormalizer {
 
 	public String normalize(String originalName) {
 		String trimmedName = originalName.trim();
+		trimmedName = trimmedName.replaceAll("[\\(\\).!?\\\\-]", "");
 		boolean allCaps = originalName.equals(originalName.toUpperCase());
 		String[] arr = trimmedName.split(" ");
 		String typeOfCompany = arr[arr.length-1].toLowerCase();

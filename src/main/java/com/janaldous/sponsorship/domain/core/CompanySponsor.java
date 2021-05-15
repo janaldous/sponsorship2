@@ -44,6 +44,9 @@ public class CompanySponsor {
 	@Column(name = "name_matches")
 	private Boolean nameMatches;
 	
+	@Column(name = "fuzzy_matches")
+	private Boolean fuzzyMatches;
+	
 	@Column(name = "locality_matches")
 	private Boolean localityMatches;
 	

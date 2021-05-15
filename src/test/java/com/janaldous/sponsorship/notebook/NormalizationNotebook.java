@@ -32,7 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Slf4j
-@Disabled
 public class NormalizationNotebook {
 
 	@Autowired
@@ -47,8 +46,9 @@ public class NormalizationNotebook {
 	@Commit
 	public void normalizeCompanyHouseEntryNames() {
 		long count = companyHouseEntryRepository.count();
+		int page = 0;
 		for (int i = 0; i < count;) {
-			Page<CompanyHouseEntry> findAll = companyHouseEntryRepository.findAll(PageRequest.of(0, 500));
+			Page<CompanyHouseEntry> findAll = companyHouseEntryRepository.findAll(PageRequest.of(page, 500));
 			
 			List<CompanyHouseEntry> normalizedCompanyHouseEntries = findAll.get()
 					.map(che -> {
@@ -60,6 +60,7 @@ public class NormalizationNotebook {
 			companyHouseEntryRepository.saveAll(normalizedCompanyHouseEntries);
 			
 			i += findAll.getSize();
+			page++;
 			log.info("now at company " + i + " of " + count);
 		}
 	}
@@ -68,8 +69,10 @@ public class NormalizationNotebook {
 	@Commit
 	public void normalizePdfSponsor() {
 		long count = pdfSponsorRepository.count();
+		int page = 0;
+
 		for (int i = 0; i < count;) {
-			Page<PDFSponsor> findAll = pdfSponsorRepository.findAll(PageRequest.of(0, 500));
+			Page<PDFSponsor> findAll = pdfSponsorRepository.findAll(PageRequest.of(page, 500));
 			
 			List<PDFSponsor> normalizedPDFSponsor = findAll.get()
 					.map(che -> {
@@ -81,6 +84,7 @@ public class NormalizationNotebook {
 			pdfSponsorRepository.saveAll(normalizedPDFSponsor);
 			
 			i += findAll.getSize();
+			page++;
 			log.info("now at company " + i + " of " + count);
 		}
 	}
