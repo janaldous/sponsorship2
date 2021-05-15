@@ -1,6 +1,7 @@
 package com.janaldous.sponsorship.service;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,23 +16,33 @@ import com.janaldous.tfl.dto.TflApiPresentationEntitiesStopPointsResponse;
 
 @Service
 public class NearbyStopsService {
-	
+
 	private TflStopPointApi tflStopPointApi;
-	
+
 	private PostCodesIoApi postCodesIoApi;
-	
+
 	@Autowired
 	public NearbyStopsService(TflStopPointApi tflStopPointApi, PostCodesIoApi postCodesIoApi) {
 		this.tflStopPointApi = tflStopPointApi;
 		this.postCodesIoApi = postCodesIoApi;
 	}
-	
+
 	public List<TrainStation> getNearbyStops(String postCode) {
-		Pair<BigDecimal,BigDecimal> coordinate = postCodesIoApi.getCoordinate(postCode);
+		Pair<BigDecimal, BigDecimal> coordinate;
+		try {
+			coordinate = postCodesIoApi.getCoordinate(postCode);
+		} catch (RuntimeException e) {
+			return Collections.emptyList();
+		}
 		TflApiPresentationEntitiesStopPointsResponse result = tflStopPointApi.getStopPointByRadius(coordinate);
 		return result.getStopPoints().stream().map(stopPoint -> {
 			Long distance = Math.round(stopPoint.getDistance());
-			String zone = stopPoint.getAdditionalProperties().stream().filter(prop -> "Zone".equals(prop.getKey())).findAny().map(prop -> prop.getValue()).orElse(null);
+			String zone = stopPoint.getAdditionalProperties()
+					.stream()
+					.filter(prop -> "Zone".equals(prop.getKey()))
+					.findAny()
+					.map(prop -> prop.getValue())
+					.orElse(null);
 			String modes = stopPoint.getModes().stream().collect(Collectors.joining(","));
 			String lines = stopPoint.getLines().stream().map(x -> x.getId()).collect(Collectors.joining(","));
 			return TrainStation.builder()

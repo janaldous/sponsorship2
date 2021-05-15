@@ -30,7 +30,7 @@ public class PostCodesIoApi {
 			PostCodeDetail result = response.getResult();
 			return new Pair<BigDecimal, BigDecimal>(result.getLongitude(), result.getLatitude());
 		} catch (RestClientException e) {
-			throw new PostCodesIOApiException(e);
+			throw new PostCodesIOApiException("Postcode: " + postcode, e);
 		}
 	}
 

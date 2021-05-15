@@ -18,23 +18,31 @@ public class TflApiConfig {
 	@Value("${tfl.api.url}")
 	public String tflApiUrl;
 	
+	@Value("${tfl.api.primarykey}")
+	public String primaryKey;
+	
+	@Value("${tfl.api.secondarykey}")
+	public String secondaryKey;
+	
 	@Autowired
 	private Environment environment;
 
 	@Bean
-    public LineApi lineApi() {
-        return new LineApi(apiClientTfl());
+    public LineApi lineApi(ApiClient apiClientTfl) {
+        return new LineApi(apiClientTfl);
     }
 	
 	@Bean
-	public StopPointApi stopPointApi() {
-		return new StopPointApi(apiClientTfl());
+	public StopPointApi stopPointApi(ApiClient apiClientTfl) {
+		return new StopPointApi(apiClientTfl);
 	}
 	
 	@Bean
     public ApiClient apiClientTfl() {
         ApiClient apiClient = new ApiClient();
         apiClient.setBasePath(tflApiUrl);
+        apiClient.setApiKey(primaryKey);
+        apiClient.setApiKeyPrefix(secondaryKey);
         apiClient.setDebugging(Arrays.asList(environment.getActiveProfiles()).contains("debug-apiclient"));
         return apiClient;
     }

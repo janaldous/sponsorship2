@@ -8,6 +8,10 @@ public class PostCodesIOApiException extends RuntimeException {
 		super(t);
 	}
 	
+	public PostCodesIOApiException(String message, Throwable t) {
+		super(message, t);
+	}
+	
 	public PostCodesIOApiException(String message) {
 		super(message);
 	}

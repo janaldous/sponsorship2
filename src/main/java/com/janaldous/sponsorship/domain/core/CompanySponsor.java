@@ -13,44 +13,56 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.vladmihalcea.hibernate.type.array.IntArrayType;
 
 import lombok.Data;
 
 @Entity
 @Data
+@TypeDefs({
+		@TypeDef(name = "int-array", typeClass = IntArrayType.class)
+})
 public class CompanySponsor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "pdf_sponsor_id", referencedColumnName = "id")
 	private PDFSponsor pdfSponsor;
-	
+
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "company_house_entry_id", referencedColumnName = "id")
 	private CompanyHouseEntry companyHouseEntry;
-	
+
 	@Column(name = "fetch_data_status")
 	@Enumerated(EnumType.STRING)
 	private FetchDataStatus fetchDataStatus;
-	
+
 	@Column(name = "date_updated")
 	@UpdateTimestamp
 	private LocalDateTime dateUpdated;
-	
+
 	@Column(name = "name_matches")
 	private Boolean nameMatches;
-	
+
 	@Column(name = "fuzzy_matches")
 	private Boolean fuzzyMatches;
-	
+
 	@Column(name = "locality_matches")
 	private Boolean localityMatches;
-	
+
 	@Column(name = "checked")
 	private Boolean checked;
-	
+
+	@Type(type = "int-array")
+	@Column(name = "tfl_zones", columnDefinition = "integer[]")
+	private int[] tflZones;
+
 }

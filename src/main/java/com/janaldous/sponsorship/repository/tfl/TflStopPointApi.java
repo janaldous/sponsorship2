@@ -26,7 +26,7 @@ public class TflStopPointApi {
 		Double longitude = coordinates.getValue0().doubleValue();
 		Double latitude = coordinates.getValue1().doubleValue();
 		Integer radius = 1000;
-		List<String> modes = Arrays.asList("tube", "dlr", "overground");
+		List<String> modes = Arrays.asList("tube", "dlr", "overground", "national-rail", "tflrail");
 		return stopPointApi.stopPointGetByGeoPoint(stopTypes, latitude, longitude, radius, false,
 				modes, null, null);
 	}
