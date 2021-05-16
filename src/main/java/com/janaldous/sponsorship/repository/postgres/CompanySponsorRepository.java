@@ -79,5 +79,27 @@ public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, 
 			+ "AND (cs.name_matches is true "
 			+ "OR cs.fuzzy_matches is true) ", nativeQuery = true)
 	long countAllByZone(Integer zone);
+
+	@Query(value = "SELECT * "
+			+ "FROM company_sponsor cs "
+			+ "JOIN company_house_entry che "
+			+ "ON cs.company_house_entry_id = che.id "
+			+ "AND (cs.name_matches is true "
+			+ "OR cs.fuzzy_matches is true) "
+			+ "AND upper(che.company_name) like :companyName "
+			+ "ORDER BY che.company_name", nativeQuery = true)
+	Page<CompanySponsor> findAllByCompanyName(@Param("companyName") String companyName, Pageable pageable);
+
+	@Query(value = "SELECT count(*) "
+			+ "FROM company_sponsor cs "
+			+ "JOIN PDFSponsor ps "
+			+ "ON cs.pdf_sponsor_id = ps.id "
+			+ "JOIN company_house_entry che "
+			+ "ON cs.company_house_entry_id = che.id "
+			+ "AND (cs.name_matches is true "
+			+ "OR cs.fuzzy_matches is true) "
+			+ "AND upper(che.company_name) like :companyName ", nativeQuery = true)
+	long countAllByCompanyName(String companyName);
+
 	
 }

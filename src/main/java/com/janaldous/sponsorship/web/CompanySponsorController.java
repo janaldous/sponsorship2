@@ -36,11 +36,13 @@ public class CompanySponsorController {
 	public CompanySponsorResultDto getCompanySponsor(@RequestParam int page, 
 			@RequestParam int size,
 			@RequestParam(required = false) Integer zone,
-			@RequestParam(required = false) String postcode) {
+			@RequestParam(required = false) String postcode,
+			@RequestParam(required = false) String companyName) {
 		
 		PageRequest pageRequest = PageRequest.of(page, size);
-		
-		if (zone != null) {
+		if (companyName != null) {
+			return companySponsorService.getCompanySponsorsByCompanyName(companyName, pageRequest);
+		} else if (zone != null) {
 			return companySponsorService.getCompanySponsorsByTflZone(zone, pageRequest);
 		} else if (postcode != null) {
 			return companySponsorService.getCompanySponsorsByPostCode(postcode, pageRequest);

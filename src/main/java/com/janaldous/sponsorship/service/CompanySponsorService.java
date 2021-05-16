@@ -49,4 +49,13 @@ public class CompanySponsorService {
 		return new CompanySponsorResultDto(page, checkedCompanies);
 	}
 
+	public CompanySponsorResultDto getCompanySponsorsByCompanyName(String companyName, PageRequest pageRequest) {
+		Page<CompanySponsorDto> page = companySponsorRepository.findAllByCompanyName(companyName, pageRequest)
+				.map(CompanySponsorMapper::toCompanySponsorDto);
+		
+		long checkedCompanies = companySponsorRepository.countAllByCompanyName(companyName);
+		
+		return new CompanySponsorResultDto(page, checkedCompanies);
+	}
+
 }
