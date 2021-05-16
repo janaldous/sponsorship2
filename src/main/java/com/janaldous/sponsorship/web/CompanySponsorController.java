@@ -3,7 +3,6 @@ package com.janaldous.sponsorship.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.janaldous.sponsorship.dto.model.CompanySponsorDto;
+import com.janaldous.sponsorship.dto.model.CompanySponsorResultDto;
 import com.janaldous.sponsorship.dto.model.TubeStationDto;
+import com.janaldous.sponsorship.exception.ValidationException;
 import com.janaldous.sponsorship.repository.tfl.TflAddressUtil;
 import com.janaldous.sponsorship.service.CompanySponsorService;
 import com.janaldous.sponsorship.service.TubeStationService;
@@ -32,9 +33,20 @@ public class CompanySponsorController {
 	}
 
 	@GetMapping("/company")
-	public Page<CompanySponsorDto> getCompanySponsor(@RequestParam int page, @RequestParam int size,
-			@RequestParam int zone) {
-		return companySponsorService.getCompanySponsorsByTflZone(zone, PageRequest.of(page, size));
+	public CompanySponsorResultDto getCompanySponsor(@RequestParam int page, 
+			@RequestParam int size,
+			@RequestParam(required = false) Integer zone,
+			@RequestParam(required = false) String postcode) {
+		
+		PageRequest pageRequest = PageRequest.of(page, size);
+		
+		if (zone != null) {
+			return companySponsorService.getCompanySponsorsByTflZone(zone, pageRequest);
+		} else if (postcode != null) {
+			return companySponsorService.getCompanySponsorsByPostCode(postcode, pageRequest);
+		} else {
+			throw new ValidationException("zone or postcode must not be empty");
+		}
 	}
 
 	@GetMapping("/company/{id}")

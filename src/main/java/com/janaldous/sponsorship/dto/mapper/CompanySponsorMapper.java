@@ -2,7 +2,6 @@ package com.janaldous.sponsorship.dto.mapper;
 
 import com.janaldous.sponsorship.domain.core.CompanySponsor;
 import com.janaldous.sponsorship.dto.model.CompanySponsorDto;
-import com.janaldous.sponsorship.repository.postgres.model.CompanySponsorZone;
 
 public class CompanySponsorMapper {
 
@@ -16,11 +15,6 @@ public class CompanySponsorMapper {
 			.setCompanyHouseEntry(CompanyHouseEntryMapper.toCompanyHouseEntryDto(input.getCompanyHouseEntry()))
 			.setPdfSponsor(PDFSponsorMapper.toPDFSponsorDto(input.getPdfSponsor()))
 			.setChecked(input.getChecked());
-		return output;
-	}
-	
-	public static CompanySponsorDto toCompanySponsorDto(CompanySponsorZone input) {
-		CompanySponsorDto output = toCompanySponsorDto(input.getCompanySponsor());
 		return output;
 	}
 	

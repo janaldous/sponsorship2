@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.janaldous.sponsorship.domain.core.CompanySponsor;
 import com.janaldous.sponsorship.domain.core.PDFSponsor;
-import com.janaldous.sponsorship.repository.postgres.model.CompanySponsorZone;
 
 @Repository
 public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, Long> {
@@ -39,19 +38,46 @@ public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, 
 			+ "AND cs.nameMatches = true")
 	Page<CompanySponsor> findAllByTownAndLocalityAndNameMatches(@Param("town") String town, Pageable pageable);
 	
-	@Query("SELECT new com.janaldous.sponsorship.repository.postgres.model.CompanySponsorZone(cs, t.zone as zone) "
-			+ "FROM CompanySponsor cs "
+	@Query(value = "SELECT * "
+			+ "FROM company_sponsor cs "
 			+ "JOIN PDFSponsor ps "
-			+ "ON cs.pdfSponsor = ps "
-			+ "JOIN CompanyHouseEntry che "
-			+ "ON cs.companyHouseEntry = che "
-			+ "JOIN TubeStation t "
-			+ "ON t.postCodeDistrict IS NOT NULL "
-			+ "AND che.addressPostCode LIKE t.postCodeDistrict || '%' "
-			+ "WHERE t.zone = :zone "
-			+ "AND (cs.nameMatches = true "
-			+ "OR cs.fuzzyMatches = true) "
-			+ "GROUP BY t.zone, cs.id")
-	Page<CompanySponsorZone> findAllByTflZoneAndNameMatches(@Param("zone") Integer zone, Pageable pageable);
+			+ "ON cs.pdf_sponsor_id = ps.id "
+			+ "WHERE :zone = any(cs.tfl_zones) "
+			+ "AND (cs.name_matches is true "
+			+ "OR cs.fuzzy_matches is true) "
+			+ "ORDER BY ps.company_name", nativeQuery = true)
+	Page<CompanySponsor> findAllByTflZoneAndNameMatches(@Param("zone") Integer zone, Pageable pageable);
+	
+	@Query(value = "SELECT * "
+			+ "FROM company_sponsor cs "
+			+ "JOIN PDFSponsor ps "
+			+ "ON cs.pdf_sponsor_id = ps.id "
+			+ "JOIN company_house_entry che "
+			+ "ON cs.company_house_entry_id = che.id "
+			+ "AND (cs.name_matches is true "
+			+ "OR cs.fuzzy_matches is true) "
+			+ "AND che.address_post_code like :postcode || '%' "
+			+ "ORDER BY ps.company_name", nativeQuery = true)
+	Page<CompanySponsor> findAllByPostCode(@Param("postcode") String postCode, Pageable pageable);
 
+	@Query(value = "SELECT count(*) "
+			+ "FROM company_sponsor cs "
+			+ "JOIN PDFSponsor ps "
+			+ "ON cs.pdf_sponsor_id = ps.id "
+			+ "JOIN company_house_entry che "
+			+ "ON cs.company_house_entry_id = che.id "
+			+ "AND (cs.name_matches is true "
+			+ "OR cs.fuzzy_matches is true) "
+			+ "AND che.address_post_code like :postcode || '%' ", nativeQuery = true)
+	long countAllByPostCode(@Param("postcode") String postCode);
+
+	@Query(value = "SELECT COUNT(*) "
+			+ "FROM company_sponsor cs "
+			+ "JOIN PDFSponsor ps "
+			+ "ON cs.pdf_sponsor_id = ps.id "
+			+ "WHERE :zone = any(cs.tfl_zones) "
+			+ "AND (cs.name_matches is true "
+			+ "OR cs.fuzzy_matches is true) ", nativeQuery = true)
+	long countAllByZone(Integer zone);
+	
 }

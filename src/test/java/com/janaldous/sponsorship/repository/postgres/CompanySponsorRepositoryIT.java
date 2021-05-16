@@ -1,6 +1,6 @@
 package com.janaldous.sponsorship.repository.postgres;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.janaldous.sponsorship.repository.postgres.model.CompanySponsorZone;
+import com.janaldous.sponsorship.domain.core.CompanySponsor;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -24,7 +24,7 @@ class CompanySponsorRepositoryIT {
 
 	@Test
 	void test() {
-		Page<CompanySponsorZone> result = companySponsorRepository.findAllByTflZoneAndNameMatches(1, PageRequest.of(0,  10));
+		Page<CompanySponsor> result = companySponsorRepository.findAllByTflZoneAndNameMatches(1, PageRequest.of(0,  10));
 		assertEquals(10, result.getSize());
 	}
 

@@ -1,11 +1,13 @@
 package com.janaldous.sponsorship.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.janaldous.sponsorship.dto.mapper.CompanySponsorMapper;
 import com.janaldous.sponsorship.dto.model.CompanySponsorDto;
+import com.janaldous.sponsorship.dto.model.CompanySponsorResultDto;
 import com.janaldous.sponsorship.exception.ResourceNotFoundException;
 import com.janaldous.sponsorship.repository.postgres.CompanySponsorRepository;
 
@@ -23,15 +25,28 @@ public class CompanySponsorService {
 				.map(CompanySponsorMapper::toCompanySponsorDto);
 	}
 
-	public Page<CompanySponsorDto> getCompanySponsorsByTflZone(Integer zone, Pageable pageable) {
-		return companySponsorRepository.findAllByTflZoneAndNameMatches(zone, pageable)
+	public CompanySponsorResultDto getCompanySponsorsByTflZone(Integer zone, Pageable pageable) {
+		Page<CompanySponsorDto> page = companySponsorRepository.findAllByTflZoneAndNameMatches(zone, pageable)
 				.map(CompanySponsorMapper::toCompanySponsorDto);
+		
+		long checkedCompanies = companySponsorRepository.countAllByZone(zone);
+		
+		return new CompanySponsorResultDto(page, checkedCompanies);
 	}
 
 	public CompanySponsorDto getCompanySponsorById(Long id) {
 		return companySponsorRepository.findById(id)
 				.map(CompanySponsorMapper::toCompanySponsorDto)
 				.orElseThrow(() -> new ResourceNotFoundException("Company sponsor was not found. id = " + id));
+	}
+
+	public CompanySponsorResultDto getCompanySponsorsByPostCode(String postcode, PageRequest pageRequest) {
+		Page<CompanySponsorDto> page = companySponsorRepository.findAllByPostCode(postcode, pageRequest)
+				.map(CompanySponsorMapper::toCompanySponsorDto);
+		
+		long checkedCompanies = companySponsorRepository.countAllByPostCode(postcode);
+		
+		return new CompanySponsorResultDto(page, checkedCompanies);
 	}
 
 }
