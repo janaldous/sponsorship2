@@ -86,7 +86,7 @@ public interface CompanySponsorRepository extends JpaRepository<CompanySponsor, 
 			+ "ON cs.company_house_entry_id = che.id "
 			+ "AND (cs.name_matches is true "
 			+ "OR cs.fuzzy_matches is true) "
-			+ "AND upper(che.company_name) like :companyName "
+			+ "AND upper(che.company_name) like '%' || upper(:companyName) || '%' "
 			+ "ORDER BY che.company_name", nativeQuery = true)
 	Page<CompanySponsor> findAllByCompanyName(@Param("companyName") String companyName, Pageable pageable);
 

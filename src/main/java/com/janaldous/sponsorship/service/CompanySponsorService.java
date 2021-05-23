@@ -11,6 +11,8 @@ import com.janaldous.sponsorship.dto.model.CompanySponsorResultDto;
 import com.janaldous.sponsorship.exception.ResourceNotFoundException;
 import com.janaldous.sponsorship.repository.postgres.CompanySponsorRepository;
 
+import lombok.NonNull;
+
 @Service
 public class CompanySponsorService {
 
@@ -40,7 +42,13 @@ public class CompanySponsorService {
 				.orElseThrow(() -> new ResourceNotFoundException("Company sponsor was not found. id = " + id));
 	}
 
-	public CompanySponsorResultDto getCompanySponsorsByPostCode(String postcode, PageRequest pageRequest) {
+	public CompanySponsorResultDto getCompanySponsorsByFilterName(@NonNull String filterName, PageRequest pageRequest) {
+		String postcode = "";
+		if (filterName.equals("techCity1")) {
+			postcode = "EC1";
+		} else if (filterName.equals("techCity2")) {
+			postcode = "EC2";
+		}
 		Page<CompanySponsorDto> page = companySponsorRepository.findAllByPostCode(postcode, pageRequest)
 				.map(CompanySponsorMapper::toCompanySponsorDto);
 		

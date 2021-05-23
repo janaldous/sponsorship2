@@ -36,7 +36,7 @@ public class CompanySponsorController {
 	public CompanySponsorResultDto getCompanySponsor(@RequestParam int page, 
 			@RequestParam int size,
 			@RequestParam(required = false) Integer zone,
-			@RequestParam(required = false) String postcode,
+			@RequestParam(required = false) String filterName,
 			@RequestParam(required = false) String companyName) {
 		
 		PageRequest pageRequest = PageRequest.of(page, size);
@@ -44,8 +44,8 @@ public class CompanySponsorController {
 			return companySponsorService.getCompanySponsorsByCompanyName(companyName, pageRequest);
 		} else if (zone != null) {
 			return companySponsorService.getCompanySponsorsByTflZone(zone, pageRequest);
-		} else if (postcode != null) {
-			return companySponsorService.getCompanySponsorsByPostCode(postcode, pageRequest);
+		} else if (filterName != null) {
+			return companySponsorService.getCompanySponsorsByFilterName(filterName, pageRequest);
 		} else {
 			throw new ValidationException("zone or postcode must not be empty");
 		}
