@@ -40,7 +40,7 @@ public class CompanySponsor {
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "company_house_entry_id", referencedColumnName = "id")
 	private CompanyHouseEntry companyHouseEntry;
-
+	
 	@Column(name = "fetch_data_status")
 	@Enumerated(EnumType.STRING)
 	private FetchDataStatus fetchDataStatus;

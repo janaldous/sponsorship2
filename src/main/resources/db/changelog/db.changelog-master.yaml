@@ -787,3 +787,38 @@ databaseChangeLog:
         - column:
             name: tfl_zones
             type: INTEGER[]
+- changeSet:
+    id: pdfsponsor-addcolumns-url
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: pdfsponsor
+          columnName: url
+    changes:
+    - addColumn:
+        tableName: pdfsponsor
+        columns:
+        - column:
+            name: url
+            type: VARCHAR(255)
+        - column:
+            name: date_updated
+            type: TIMESTAMP
+- changeSet:
+    id: pdfsponsor-addcolumns-socialurl
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: pdfsponsor
+          columnName: social_url
+    changes:
+    - addColumn:
+        tableName: pdfsponsor
+        columns:
+        - column:
+            name: social_url
+            type: VARCHAR(255)

@@ -21,6 +21,12 @@ public class PDFSponsorDto {
 	
 	private String subTier;
 	
+	private String url;
+	
+	private String socialUrl;
+	
 	private LocalDateTime dateAdded;
+	
+	private LocalDateTime dateUpdated;
 	
 }
