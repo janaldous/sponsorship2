@@ -43,6 +43,8 @@ public class PDFSponsor {
 	
 	private String url;
 	
+	private String careersUrl;
+	
 	@Column(name = "social_url")
 	private String socialUrl;
 	

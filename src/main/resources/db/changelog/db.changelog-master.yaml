@@ -822,3 +822,19 @@ databaseChangeLog:
         - column:
             name: social_url
             type: VARCHAR(255)
+- changeSet:
+    id: pdfsponsor-addcolumns-careersUrl
+    author: janaldous
+    preConditions:
+    - onFail: MARK_RAN
+    - not:
+        columnExists:
+          tableName: pdfsponsor
+          columnName: careers_url
+    changes:
+    - addColumn:
+        tableName: pdfsponsor
+        columns:
+        - column:
+            name: careers_url
+            type: VARCHAR(255)
